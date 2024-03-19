@@ -7,7 +7,7 @@
 ## Requirements
 | Platform | Minimum Swift Version | Installation |
 | --- | --- | --- |
-| iOS 15.0+ / macOS 11+ | 5.5 | [Swift Package Manager](#swift-package-manager) |
+| iOS 15.0+ / macOS 12+ | 5.5 | [Swift Package Manager](#swift-package-manager) |
 
 ## Installation
 ### Swift Package Manager
