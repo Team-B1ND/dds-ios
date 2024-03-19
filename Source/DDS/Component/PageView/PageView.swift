@@ -34,7 +34,7 @@ public struct DodamPageView: View {
                             if selected == idx {
                                 .init(.tint)
                             } else {
-                                .init(Color(.tertiary))
+                                .init(Dodam.color(.tertiary))
                             }
                         }())
                         .frame(width: 5, height: 5)

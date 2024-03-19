@@ -10,7 +10,7 @@ public enum DodamIconography: String {
     case calendar              = "Calendar"
     case checkmark             = "Checkmark"
     case checkmarkCircle       = "CheckmarkCircle"
-    case chevronLeft           = "ChevronLeft"
+    case chevronRight          = "ChevronRight"
     case doorOpen              = "DoorOpen"
     case exclamationmarkCircle = "ExclamationmarkCircle"
     case eye                   = "Eye"

@@ -57,7 +57,7 @@ public struct DodamTextField: View {
     }
     
     private var foregroundColor: AnyShapeStyle {
-        isFocused ? .init(.tint) : .init(Color(.tertiary))
+        isFocused ? .init(.tint) : .init(Dodam.color(.tertiary))
     }
     
     public var body: some View {

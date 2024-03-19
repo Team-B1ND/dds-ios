@@ -1,8 +1,13 @@
 import SwiftUI
 
-public struct DodamColor {
+@available(macOS 12, iOS 15, *)
+public struct DodamColor: RawRepresentable {
     
-    public let color: Color
+    public let rawValue: Color
+    
+    public init?(rawValue: Color) {
+        self.rawValue = rawValue
+    }
     
     private init(
         hex: String,
@@ -10,10 +15,10 @@ public struct DodamColor {
     ) {
         let lightColor = UIColor(hex: hex)
         if dark == nil {
-            color = Color(lightColor)
+            rawValue = Color(lightColor)
         } else {
             let darkColor = UIColor(hex: dark!)
-            color = Color(UIColor {
+            rawValue = Color(UIColor {
                 if $0.userInterfaceStyle == .dark {
                     darkColor
                 } else {
@@ -31,6 +36,8 @@ public struct DodamColor {
     public static let onSurface: Self        = .init(hex: "#111111", dark: "#FFFFFF")
     public static let surfaceContainer: Self = .init(hex: "#FFFFFF", dark: "#1F1F1F")
     public static let onSurfaceVariant: Self = .init(hex: "#B7B7B7", dark: "#777777")
+    public static let background: Self       = .init(hex: "#FFFFFF", dark: "#000000")
+    public static let onBackground: Self     = .init(hex: "#000000", dark: "#FFFFFF")
     public static let outline: Self          = .init(hex: "#DFDFDF", dark: "#555555")
     public static let outlineVariant: Self   = .init(hex: "#EFEFEF", dark: "#383838")
 }

@@ -1,5 +1,6 @@
 import UIKit
 
+@available(macOS 12, iOS 15, *)
 public extension UIColor {
     
     convenience init(hex: String) {

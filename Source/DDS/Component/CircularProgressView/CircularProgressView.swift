@@ -24,14 +24,14 @@ public struct DodamCircularProgressView: View {
     @State private var animatedProgress: CGFloat = 0
     
     private var foregroundColor: AnyShapeStyle {
-        isDisabled ? .init(Color(.tertiary)) : .init(.tint)
+        isDisabled ? .init(Dodam.color(.tertiary)) : .init(.tint)
     }
     
     public var body: some View {
         ZStack {
             Circle()
                 .stroke(lineWidth: 10)
-                .foregroundStyle(Color(.secondary))
+                .dodamColor(.secondary)
             Circle()
                 .trim(from: 0, to: min(animatedProgress, 1))
                 .stroke(

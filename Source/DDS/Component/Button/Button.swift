@@ -124,7 +124,7 @@ public struct DodamButton: View {
             .frame(height: height)
             .padding(.horizontal, padding)
             .frame(maxWidth: maxWidth)
-            .foregroundStyle(Color(.onPrimary))
+            .dodamColor(.onPrimary)
         }
         .disabled(isPerformingTask)
         .background(.tint)
@@ -145,7 +145,7 @@ public struct DodamButton: View {
 #Preview {
     VStack(alignment: .leading) {
         let title = "Button"
-        let icon = Image(.home)
+        let icon = Dodam.icon(.home)
         let action: () async -> Void = {
             try? await Task.sleep(nanoseconds: 1_000_000_000)
         }

@@ -9,7 +9,7 @@ public struct DodamLoadingView: View {
         HStack(spacing: 8) {
             ForEach(0..<3) { idx in
                 Circle()
-                    .fill(idx != loadingState ? .tertiary : .secondary)
+                    .dodamFill(idx != loadingState ? .tertiary : .secondary)
                     .frame(width: 8, height: 8)
             }
         }

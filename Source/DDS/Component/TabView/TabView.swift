@@ -44,10 +44,10 @@ public struct DodamTabView: View {
                                     }
                                 }
                             } label: {
-                                DodamIcon(image, size: 24)
+                                Dodam.icon(image, size: 24)
                                     .padding(8)
-                                    .foregroundStyle(
-                                        Color(isSelected ? .onPrimary : .onSurface)
+                                    .dodamColor(
+                                        isSelected ? .onPrimary : .onSurface
                                     )
                             }
                             .background(
@@ -67,7 +67,7 @@ public struct DodamTabView: View {
                     }
                 }
                 .padding(.vertical, 12)
-                .background(Color(.surfaceContainer))
+                .background(Dodam.color(.surfaceContainer))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal, 16)
                 .padding(
