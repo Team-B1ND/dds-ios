@@ -1,16 +1,16 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public struct DodamScrollView<C: View>: View {
+public struct DodamScrollView<I: View, C: View>: View {
     
-    private let title: String
-    private let content: C
+    private let navigationBarItem: () -> I
+    private let content: () -> C
     
     public init(
-        title: String,
+        @ViewBuilder item: @escaping () -> I,
         @ViewBuilder content: @escaping () -> C
     ) {
-        self.title = title
+        self.navigationBarItem = item
         self.content = content
     }
     
@@ -21,11 +21,7 @@ public struct DodamScrollView<C: View>: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .top) {
             HStack {
-                Text(title)
-                    .font(.headline(.large))
-                    .dodamColor(.onBackground)
-                    .padding(.leading, 20)
-                Spacer()
+                navigationBarItem()
             }
             .frame(height: 58)
             .frame(maxWidth: .infinity)
@@ -46,11 +42,5 @@ public struct DodamScrollView<C: View>: View {
             .ignoresSafeArea()
         }
         .background(Dodam.color(.surface))
-    }
-}
-
-#Preview {
-    DodamScrollView(title: "title") {
-        Text("Scroll Item")
     }
 }
