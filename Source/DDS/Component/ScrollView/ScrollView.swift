@@ -3,6 +3,8 @@ import SwiftUI
 @available(macOS 12, iOS 15, *)
 public struct DodamScrollView<I: View, C: View>: View {
     
+    @State private var navigationBarHeight: CGFloat = 0
+    
     private let navigationBarItem: () -> I
     private let content: () -> C
     
@@ -15,18 +17,22 @@ public struct DodamScrollView<I: View, C: View>: View {
     }
     
     public var body: some View {
-        ScrollView(showsIndicators: false) {
-            content()
+        ZStack(alignment: .top) {
+            ScrollView(showsIndicators: false) {
+                content()
+                    .padding(.top, navigationBarHeight)
+            }
+            navigationBarItem()
+                .background(
+                    GeometryReader { geometryProxy in
+                        Color.clear
+                            .onAppear {
+                                navigationBarHeight = geometryProxy.size.height
+                            }
+                    }
+                )
         }
         .frame(maxWidth: .infinity)
-        .overlay(alignment: .top) {
-            HStack {
-                navigationBarItem()
-            }
-            .frame(height: 58)
-            .frame(maxWidth: .infinity)
-            .background(.regularMaterial)
-        }
         .overlay(alignment: .bottom) {
             VStack {
                 Spacer()
@@ -42,5 +48,26 @@ public struct DodamScrollView<I: View, C: View>: View {
             .ignoresSafeArea()
         }
         .background(Dodam.color(.surface))
+    }
+}
+
+#Preview {
+    DodamScrollView {
+        HStack {
+            Text("도담 스크롤")
+                .font(.headline(.small))
+                .dodamColor(.onBackground)
+                .padding(.leading, 20)
+            Spacer()
+        }
+        .frame(height: 58)
+        .frame(maxWidth: .infinity)
+        .background(.regularMaterial)
+    } content: {
+        VStack {
+            ForEach(0..<10) { _ in
+                Text("도담 스크롤 콘텐츠")
+            }
+        }
     }
 }
