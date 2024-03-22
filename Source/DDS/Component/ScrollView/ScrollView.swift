@@ -21,6 +21,7 @@ public struct DodamScrollView<I: View, C: View>: View {
             ScrollView(showsIndicators: false) {
                 content()
                     .padding(.top, navigationBarHeight)
+                    .padding(.bottom, 150)
             }
             navigationBarItem()
                 .background(
