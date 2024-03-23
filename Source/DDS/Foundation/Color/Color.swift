@@ -40,4 +40,5 @@ public struct DodamColor: RawRepresentable {
     public static let onBackground: Self     = .init(hex: "#000000", dark: "#FFFFFF")
     public static let outline: Self          = .init(hex: "#DFDFDF", dark: "#555555")
     public static let outlineVariant: Self   = .init(hex: "#EFEFEF", dark: "#383838")
+    public static let error: Self            = .init(hex: "#EF2B2A", dark: "#EF2B2A")
 }
