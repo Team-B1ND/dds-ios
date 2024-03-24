@@ -86,7 +86,7 @@ public struct DodamButton: View {
         )
     }
     
-    @State private var isPerformingTask = false
+    @State private var isPerformingTask: Bool = false
     
     private var maxWidth: CGFloat? {
         guard padding != nil else { return .infinity }
