@@ -4,19 +4,31 @@ import SwiftUI
 public struct DodamCircularProgressView: View {
     
     private let progress: CGFloat
+    private let backgroundColor: Color?
     private let isDisabled: Bool
     
     public init(
         progress: CGFloat,
+        backgroundColor: Color? = nil,
         isDisabled: Bool = false
     ) {
         self.progress = progress
+        self.backgroundColor = backgroundColor
         self.isDisabled = isDisabled
+    }
+    
+    public func backgroundColor(_ dodamColor: DodamColor) -> Self {
+        .init(
+            progress: self.progress,
+            backgroundColor: dodamColor.rawValue,
+            isDisabled: self.isDisabled
+        )
     }
     
     public func disabled(_ condition: Bool = true) -> Self {
         .init(
             progress: self.progress,
+            backgroundColor: self.backgroundColor,
             isDisabled: condition
         )
     }
@@ -31,7 +43,9 @@ public struct DodamCircularProgressView: View {
         ZStack {
             Circle()
                 .stroke(lineWidth: 10)
-                .dodamColor(.secondary)
+                .foregroundStyle(
+                    backgroundColor ?? Dodam.color(.secondary)
+                )
             Circle()
                 .trim(from: 0, to: min(animatedProgress, 1))
                 .stroke(
@@ -66,6 +80,8 @@ public struct DodamCircularProgressView: View {
         var body: some View {
             VStack(spacing: 20) {
                 DodamCircularProgressView(progress: progress)
+                DodamCircularProgressView(progress: progress)
+                    .backgroundColor(.error)
                 Slider(value: $progress)
                     .tint(.gray)
             }
