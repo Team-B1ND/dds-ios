@@ -24,7 +24,7 @@ public struct DodamLinearProgressView: View {
     @State private var animatedProgress: CGFloat = 0
     
     private var foregroundColor: AnyShapeStyle {
-        isDisabled ? .init(Dodam.color(.tertiary)) : .init(.tint)
+        isDisabled ? .init(Dodam.color(.onSurfaceVariant)) : .init(.tint)
     }
     
     public var body: some View {
