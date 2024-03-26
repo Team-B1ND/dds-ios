@@ -20,9 +20,9 @@ public struct DodamEmptyView: View {
     }
     
     public var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             VStack(spacing: 12) {
-                Image(icon: .xmarkCircle)
+                Image(icon: .home)
                     .frame(width: 36, height: 36)
                 Text("아직 신청한 \(emptyType.rawValue)이 없어요.")
                     .font(.label(.large))
@@ -33,11 +33,12 @@ public struct DodamEmptyView: View {
                 action()
             } label: {
                 Text("\(emptyType.rawValue) 신청하기")
-                    .dodamColor(.onSurfaceVariant)
+                    .font(.body(.large))
+                    .dodamColor(.onSecondaryContainer)
                     .padding(.vertical, 14)
                     .frame(maxWidth: .infinity)
             }
-            .background(Dodam.color(.secondary))
+            .background(Dodam.color(.secondaryContainer))
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding([.horizontal, .bottom], 16)
         }
