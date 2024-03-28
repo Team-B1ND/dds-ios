@@ -39,9 +39,6 @@ public struct DodamTabView: View {
                             Button {
                                 if selected != idx {
                                     selected = idx
-                                    withAnimation(.spring(duration: 0.2)) {
-                                        animatedSelection = idx
-                                    }
                                 }
                             } label: {
                                 Dodam.icon(image, size: 24)
@@ -78,6 +75,9 @@ public struct DodamTabView: View {
         }
         .onChange(of: selected) { newValue in
             selection?.wrappedValue = newValue
+            withAnimation(.spring(duration: 0.2)) {
+                animatedSelection = newValue
+            }
         }
         .onReceive(Just(selection)) { newValue in
             if let newValue,
