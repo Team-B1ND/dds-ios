@@ -19,11 +19,19 @@ public struct DodamEmptyView: View {
         self.action = action
     }
     
+    private var icon: Image {
+        switch emptyType {
+        case .outGoing: return .init(icon: .convenienceStore)
+        case .outSleeping: return .init(icon: .tent)
+        case .nightStudy: return .init(icon: .fullMoonFace)
+        }
+    }
+    
     public var body: some View {
         VStack(spacing: 24) {
             VStack(spacing: 12) {
-                Image(icon: .home)
-                    .frame(width: 36, height: 36)
+                icon
+                .frame(width: 36, height: 36)
                 Text("아직 신청한 \(emptyType.rawValue)이 없어요.")
                     .font(.label(.large))
                     .dodamColor(.onSurfaceVariant)
