@@ -12,6 +12,7 @@ public struct DodamButton: View {
     private let iconSize: CGFloat
     private let height: CGFloat
     private let padding: CGFloat?
+    private let isDisabled: Bool
     
     private init(
         title: String,
@@ -20,7 +21,8 @@ public struct DodamButton: View {
         font: Font = .body(.medium),
         iconSize: CGFloat = 19,
         height: CGFloat = 48,
-        padding: CGFloat? = nil
+        padding: CGFloat? = nil,
+        isDisabled: Bool = false
     ) {
         self.title = title
         self.icon = icon
@@ -29,6 +31,7 @@ public struct DodamButton: View {
         self.iconSize = iconSize
         self.height = height
         self.padding = padding
+        self.isDisabled = isDisabled
     }
     
     public static func fullWidth(
@@ -86,6 +89,19 @@ public struct DodamButton: View {
         )
     }
     
+    public func disabled(_ condition: Bool = true) -> Self {
+        .init(
+            title: self.title,
+            icon: self.icon,
+            action: self.action,
+            font: self.font,
+            iconSize: self.iconSize,
+            height: self.height,
+            padding: self.padding,
+            isDisabled: condition
+        )
+    }
+    
     @State private var isPerformingTask: Bool = false
     
     private var maxWidth: CGFloat? {
@@ -95,6 +111,10 @@ public struct DodamButton: View {
     
     private var cornerRadius: CGFloat {
         height >= 48 ? 10 : 8
+    }
+    
+    private var isTranslucent: Bool {
+        isDisabled || isPerformingTask
     }
     
     public var body: some View {
@@ -126,12 +146,12 @@ public struct DodamButton: View {
             .frame(maxWidth: maxWidth)
             .dodamColor(.onPrimary)
         }
-        .disabled(isPerformingTask)
+        .disabled(isTranslucent)
         .background(.tint)
         .clipShape(
             RoundedRectangle(cornerRadius: cornerRadius)
         )
-        .opacity(isPerformingTask ? 0.5 : 1)
+        .opacity(isTranslucent ? 0.5 : 1)
         .background(
             Group {
                 if isPerformingTask {
