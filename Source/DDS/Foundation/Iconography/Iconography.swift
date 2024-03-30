@@ -5,6 +5,7 @@ public enum DodamIconography: String {
     
     case arrowLeft             = "ArrowLeft"
     case b1ndLogo              = "B1NDLogo"
+    case barChart              = "BarChart"
     case bell                  = "Bell"
     case bus                   = "Bus"
     case calendar              = "Calendar"
@@ -12,6 +13,8 @@ public enum DodamIconography: String {
     case checkmarkCircle       = "CheckmarkCircle"
     case chevronLeft           = "ChevronLeft"
     case chevronRight          = "ChevronRight"
+    case colorfulBus           = "ColorfulBus"
+    case colorfulCalender      = "ColorfulCalender"
     case convenienceStore      = "ConvenienceStore"
     case doorOpen              = "DoorOpen"
     case exclamationmarkCircle = "ExclamationmarkCircle"
@@ -19,6 +22,7 @@ public enum DodamIconography: String {
     case eyeSlash              = "EyeSlash"
     case forkAndKnife          = "ForkAndKnife"
     case fullMoonFace          = "FullMoonFace"
+    case gaer                  = "Gear"
     case home                  = "Home"
     case logo                  = "Logo"
     case megaphone             = "Megaphone"
@@ -27,5 +31,7 @@ public enum DodamIconography: String {
     case note                  = "Note"
     case plus                  = "Plus"
     case tent                  = "Tent"
+    case wakeupMegaphone       = "WakeupMegaphone"
+    case wakeupNote            = "WakeupNote"
     case xmarkCircle           = "XmarkCircle"
 }
