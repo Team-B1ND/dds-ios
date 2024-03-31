@@ -14,7 +14,7 @@ public struct DodamLoadingView: View {
             }
         }
         .onChange(of: loadingState) { newValue in
-            Task {
+            Task.detached {
                 try? await Task.sleep(nanoseconds: 300_000_000)
                 withAnimation(.spring(duration: 0.5)) {
                     loadingState = (newValue + 1) % 3
