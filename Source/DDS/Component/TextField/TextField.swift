@@ -64,8 +64,10 @@ public struct DodamTextField: View {
         VStack(spacing: 12) {
             ZStack(alignment: .leading) {
                 Text(title)
-                    .scaleEffect(isHighlighted ? 0.75 : 1,
-                                 anchor: .topLeading)
+                    .scaleEffect(
+                        isHighlighted ? 0.75 : 1,
+                        anchor: .topLeading
+                    )
                     .padding(.top, isHighlighted ? -30 : 0)
                 Group {
                     if isSecured {
