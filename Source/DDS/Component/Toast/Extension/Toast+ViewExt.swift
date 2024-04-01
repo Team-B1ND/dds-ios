@@ -5,7 +5,7 @@ public extension View {
     
     @ViewBuilder
     func toast<C: View>(
-        isPresented: Binding<Bool>,
+        isPresented: Binding<Bool>? = nil,
         timeout: Double? = nil,
         @ViewBuilder content: @escaping () -> C
     ) -> some View {

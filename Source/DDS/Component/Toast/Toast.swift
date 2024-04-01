@@ -1,26 +1,28 @@
 import SwiftUI
+import Combine
 
 @available(macOS 12, iOS 15, *)
 public struct DodamToast<C: View, V: View>: View {
     
-    @Binding private var isPresented: Bool
+    @State private var isPresented: Binding<Bool>?
     private let timeout: Double?
     private let content: () -> C
     private let view: () -> V
     
     public init(
-        isPresented: Binding<Bool>,
+        isPresented: Binding<Bool>?,
         timeout: Double?,
         @ViewBuilder content: @escaping () -> C,
         @ViewBuilder view: @escaping () -> V
     ) {
-        self._isPresented = isPresented
-        self.animatedPresentation = isPresented.wrappedValue
+        self.isPresented = isPresented
+        self.animatedPresentation = isPresented?.wrappedValue ?? false
         self.timeout = timeout
         self.content = content
         self.view = view
     }
     
+    @State private var unwrappedPresentation: Bool = false
     @State private var animatedPresentation: Bool
     
     public var body: some View {
@@ -41,7 +43,7 @@ public struct DodamToast<C: View, V: View>: View {
                     )
             }
         }
-        .onChange(of: isPresented) { newValue in
+        .onChange(of: unwrappedPresentation) { newValue in
             withAnimation(.spring(duration: 0.2)) {
                 animatedPresentation = newValue
             }
@@ -49,8 +51,21 @@ public struct DodamToast<C: View, V: View>: View {
                 let time = 1_000_000_000 * UInt64(timeout)
                 Task {
                     try? await Task.sleep(nanoseconds: time)
-                    isPresented = false
+                    unwrappedPresentation = false
+                    if isPresented != nil {
+                        isPresented?.wrappedValue = false
+                    }
                 }
+            }
+        }
+        .onReceive(Just(isPresented)) { newValue in
+            if let newValue {
+                unwrappedPresentation = newValue.wrappedValue
+            }
+        }
+        .onAppear {
+            if isPresented == nil {
+                unwrappedPresentation = true
             }
         }
     }
