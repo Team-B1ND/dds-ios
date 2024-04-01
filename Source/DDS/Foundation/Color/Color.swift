@@ -29,6 +29,7 @@ public struct DodamColor: RawRepresentable {
     }
     
     public static let primary: Self                 = .init(hex: "#0083F0")
+    public static let primary: Self                 = .init(hex: "#0083F0")
     public static let onPrimary: Self               = .init(hex: "#FFFFFF")
     public static let error: Self                   = .init(hex: "#EF2B2A")
     public static let onError: Self                 = .init(hex: "#FFFFFF")
