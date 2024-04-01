@@ -7,6 +7,7 @@ public struct DodamNavigationBar: View {
     private let font: Font
     private let verticalSpacing: CGFloat?
     private let showBackButton: Bool
+    private let subView: AnyView?
     private let buttons: [DodamNavigationBarButton]
     
     private init(
@@ -14,12 +15,14 @@ public struct DodamNavigationBar: View {
         font: Font = .headline(.small),
         verticalSpacing: CGFloat? = nil,
         showBackButton: Bool = true,
+        subView: AnyView? = nil,
         buttons: [DodamNavigationBarButton] = .init()
     ) {
         self.title = title
         self.font = font
         self.verticalSpacing = verticalSpacing
         self.showBackButton = showBackButton
+        self.subView = subView
         self.buttons = buttons
     }
     
@@ -52,6 +55,19 @@ public struct DodamNavigationBar: View {
         )
     }
     
+    func subView<S: View>(
+        @ViewBuilder content: @escaping () -> S
+    ) -> Self {
+        .init(
+            title: self.title,
+            font: self.font,
+            verticalSpacing: self.verticalSpacing,
+            showBackButton: self.showBackButton,
+            subView: AnyView(content()),
+            buttons: self.buttons
+        )
+    }
+    
     public func button(
         icon: DodamIconography,
         action: @escaping () -> Void
@@ -61,6 +77,7 @@ public struct DodamNavigationBar: View {
             font: self.font,
             verticalSpacing: self.verticalSpacing,
             showBackButton: self.showBackButton,
+            subView: self.subView,
             buttons: self.buttons + [
                 .init(
                     icon: icon,
@@ -78,7 +95,7 @@ public struct DodamNavigationBar: View {
     @Environment(\.dismiss) var dismiss
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 if showBackButton {
                     Button {
@@ -116,6 +133,18 @@ public struct DodamNavigationBar: View {
                 text
                     .padding([.horizontal, .bottom], 16)
                     .padding(.top, verticalSpacing)
+                    .frame(
+                        maxWidth: .infinity,
+                        alignment: .leading
+                    )
+            }
+            if let subView {
+                subView
+                    .padding(
+                        .top,
+                        verticalSpacing == nil ? 16 : 0
+                    )
+                    .padding([.horizontal, .bottom], 16)
             }
         }
     }
