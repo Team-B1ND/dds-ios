@@ -5,14 +5,16 @@ public struct DodamNavigationBar: View {
     
     private let title: String
     private let font: Font
+    private let icon: DodamIconography?
     private let verticalSpacing: CGFloat?
     private let showBackButton: Bool
     private let subView: AnyView?
     private let buttons: [DodamNavigationBarButton]
     
     private init(
-        title: String,
+        title: String = "",
         font: Font = .headline(.small),
+        icon: DodamIconography? = nil,
         verticalSpacing: CGFloat? = nil,
         showBackButton: Bool = true,
         subView: AnyView? = nil,
@@ -20,6 +22,7 @@ public struct DodamNavigationBar: View {
     ) {
         self.title = title
         self.font = font
+        self.icon = icon
         self.verticalSpacing = verticalSpacing
         self.showBackButton = showBackButton
         self.subView = subView
@@ -29,6 +32,13 @@ public struct DodamNavigationBar: View {
     public static func `default`(title: String) -> Self {
         .init(
             title: title,
+            showBackButton: false
+        )
+    }
+    
+    public static func icon(icon: DodamIconography) -> Self {
+        .init(
+            icon: icon,
             showBackButton: false
         )
     }
@@ -61,6 +71,7 @@ public struct DodamNavigationBar: View {
         .init(
             title: self.title,
             font: self.font,
+            icon: self.icon,
             verticalSpacing: self.verticalSpacing,
             showBackButton: self.showBackButton,
             subView: AnyView(content()),
@@ -75,6 +86,7 @@ public struct DodamNavigationBar: View {
         .init(
             title: self.title,
             font: self.font,
+            icon: self.icon,
             verticalSpacing: self.verticalSpacing,
             showBackButton: self.showBackButton,
             subView: self.subView,
@@ -107,6 +119,13 @@ public struct DodamNavigationBar: View {
                             .frame(width: 48, height: 48)
                     }
                     .dodamColor(.onSurface)
+                }
+                if let icon = icon {
+                    Dodam.icon(icon)
+                        .resizable()
+                        .frame(width: 88, height: 22)
+                        .dodamColor(.primary)
+                        .padding(.leading, 16)
                 }
                 if verticalSpacing == nil {
                     text
@@ -155,6 +174,9 @@ public struct DodamNavigationBar: View {
         Divider()
         DodamNavigationBar.default(title: "Default")
             .button(icon: .plus) { }
+            .button(icon: .bell) { }
+        Divider()
+        DodamNavigationBar.icon(icon: .logo)
             .button(icon: .bell) { }
         Divider()
         DodamNavigationBar.small(title: "Small")
