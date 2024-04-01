@@ -44,6 +44,16 @@ public extension NavigationViewProtocol {
         )
     }
     
+    static func icon(
+        icon: DodamIconography,
+        @ViewBuilder content: @escaping () -> C
+    ) -> Self {
+        .init(
+            navigationBar: .icon(icon: icon),
+            content: content
+        )
+    }
+    
     static func small(
         title: String,
         @ViewBuilder content: @escaping () -> C
