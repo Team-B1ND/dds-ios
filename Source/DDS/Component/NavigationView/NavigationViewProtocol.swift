@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-protocol NavigationViewProtocol: View {
+public protocol NavigationViewProtocol: View {
     
     associatedtype C: View
     
@@ -18,7 +18,7 @@ protocol NavigationViewProtocol: View {
     )
 }
 
-extension NavigationViewProtocol {
+public extension NavigationViewProtocol {
     
     init(
         navigationBar: DodamNavigationBar,
