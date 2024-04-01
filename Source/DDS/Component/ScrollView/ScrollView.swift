@@ -25,9 +25,10 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
             content()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background(Dodam.color(.surface))
         .safeAreaInset(edge: .top) {
             applyBar(bar: navigationBar)
-                .background(.bar)
+                .background(Dodam.color(.surface))
         }
     }
 }
