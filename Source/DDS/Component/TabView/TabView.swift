@@ -82,9 +82,7 @@ public struct DodamTabView: View {
         .onReceive(Just(selection)) { newValue in
             if let newValue,
                selected != newValue.wrappedValue {
-                withAnimation(.spring) {
-                    selected = newValue.wrappedValue
-                }
+                selected = newValue.wrappedValue
             }
         }
     }
