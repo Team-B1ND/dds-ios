@@ -20,15 +20,26 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
         self.content = content
     }
     
+    @State private var topInset: CGFloat!
+    @State private var blueOpacity: CGFloat = 0
+    
     public var body: some View {
         ScrollView(showsIndicators: false) {
-            content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            GeometryReader { insideProxy in
+                content()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onChange(of: insideProxy.frame(in: .global).minY) {
+                        if topInset == nil {
+                            topInset = $0
+                        }
+                        let scrollOffset = $0 - topInset
+                        blueOpacity = max(min(-(scrollOffset / 16), 1), 0)
+                    }
+            }
         }
-        .background(Dodam.color(.surface))
         .safeAreaInset(edge: .top) {
             applyBar(bar: navigationBar)
-                .background(Dodam.color(.surface))
+                .background(.bar.opacity(blueOpacity))
         }
     }
 }
