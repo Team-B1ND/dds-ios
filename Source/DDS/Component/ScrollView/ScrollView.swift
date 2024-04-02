@@ -25,17 +25,20 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
     
     public var body: some View {
         ScrollView(showsIndicators: false) {
-            GeometryReader { insideProxy in
-                content()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .onChange(of: insideProxy.frame(in: .global).minY) {
-                        if topInset == nil {
-                            topInset = $0
-                        }
-                        let scrollOffset = $0 - topInset
-                        blueOpacity = max(min(-(scrollOffset / 16), 1), 0)
+            content()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(
+                    GeometryReader { insideProxy in
+                        EmptyView()
+                            .onChange(of: insideProxy.frame(in: .global).minY) {
+                                if topInset == nil {
+                                    topInset = $0
+                                }
+                                let scrollOffset = $0 - topInset
+                                blueOpacity = max(min(-(scrollOffset / 16), 1), 0)
+                            }
                     }
-            }
+                )
         }
         .safeAreaInset(edge: .top) {
             applyBar(bar: navigationBar)
@@ -46,8 +49,12 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
 
 #Preview {
     DodamScrollView.large(title: "Title") {
-        Text("Hello")
-            .font(.largeTitle)
+        VStack {
+            ForEach(0..<500) { _ in
+                Text("Hello")
+                    .font(.largeTitle)
+            }
+        }
     }
     .button(icon: .plus) { }
     .button(icon: .bell) { }
