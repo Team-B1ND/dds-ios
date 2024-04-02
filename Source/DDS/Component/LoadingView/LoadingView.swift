@@ -5,6 +5,8 @@ public struct DodamLoadingView: View {
     
     @State private var loadingState: Int = -1
     
+    public init() { }
+    
     public var body: some View {
         HStack(spacing: 8) {
             ForEach(0..<3) { idx in
