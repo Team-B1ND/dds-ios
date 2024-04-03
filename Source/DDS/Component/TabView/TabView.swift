@@ -24,13 +24,13 @@ public struct DodamTabView: View {
     
     public var body: some View {
         GeometryReader { proxy in
-            ZStack(alignment: .bottom) {
-                ForEach(contents.indices, id: \.self) { idx in
-                    if selected == idx {
-                        contents[idx].content
-                    }
+            ForEach(contents.indices, id: \.self) { idx in
+                if selected == idx {
+                    contents[idx].content
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .safeAreaInset(edge: .bottom) {
                 HStack {
                     Spacer()
                     ForEach(contents.indices, id: \.self) { idx in

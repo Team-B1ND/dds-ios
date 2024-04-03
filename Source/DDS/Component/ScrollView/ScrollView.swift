@@ -40,6 +40,18 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
                     }
                 )
         }
+        .mask(alignment: .bottom) {
+            VStack(spacing: 0) {
+                Color.black
+                LinearGradient(
+                    colors: [.black, .clear],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 150)
+            }
+            .ignoresSafeArea()
+        }
         .safeAreaInset(edge: .top) {
             applyBar(bar: navigationBar)
                 .background(.bar.opacity(blueOpacity))
