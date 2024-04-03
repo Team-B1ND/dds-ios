@@ -71,15 +71,28 @@ public struct DodamTextField: View {
                         anchor: .topLeading
                     )
                     .padding(.top, isHighlighted ? -30 : 0)
-                Group {
-                    if isSecured {
-                        SecureField("", text: $text)
-                    } else {
-                        TextField("", text: $text)
+                HStack {
+                    Group {
+                        if isSecured {
+                            SecureField("", text: $text)
+                        } else {
+                            TextField("", text: $text)
+                        }
+                    }
+                    .focused($isFocused)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .foregroundStyle(Color(.label))
+                    if isFocused && !text.isEmpty {
+                        Button {
+                            text = ""
+                        } label: {
+                            Dodam.icon(.xmarkCircle)
+                        }
+                        .dodamColor(.onSurfaceVariant)
+                        .padding(.vertical, -2)
                     }
                 }
-                .focused($isFocused)
-                .foregroundStyle(Color(.label))
             }
             .frame(height: 41, alignment: .bottomLeading)
             .font(.body(.medium))
