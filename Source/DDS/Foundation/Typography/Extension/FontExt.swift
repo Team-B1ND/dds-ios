@@ -11,7 +11,7 @@ public extension Font {
     }
     
     static func suit(size: CGFloat, weight: SUIT.Weight) -> Font {
-        custom(weight.rawValue, size: size)
+        custom(weight.rawValue, fixedSize: size)
     }
     
     static func headline(_ type: DodamHeadline) -> Font {
