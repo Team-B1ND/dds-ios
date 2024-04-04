@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public protocol NavigationViewProtocol: View {
+public protocol DodamNavigationViewProtocol: View {
     
     associatedtype C: View
     
@@ -10,23 +10,26 @@ public protocol NavigationViewProtocol: View {
     var subView: AnyView? { get }
     var content: () -> C { get }
     
-    init(
+    static func makeView(
+        borderSize: CGFloat?,
         navigationBar: DodamNavigationBar,
         buttons: [DodamNavigationBarButton],
         subView: AnyView?,
         @ViewBuilder content: @escaping () -> C
-    )
+    ) -> Self
 }
 
-public extension NavigationViewProtocol {
+public extension DodamNavigationViewProtocol {
     
-    init(
+    static func makeView(
+        borderSize: CGFloat? = nil,
         navigationBar: DodamNavigationBar,
         buttons: [DodamNavigationBarButton] = .init(),
         subView: AnyView? = nil,
         @ViewBuilder content: @escaping () -> C
-    ) {
-        self.init(
+    ) -> Self {
+        makeView(
+            borderSize: borderSize,
             navigationBar: navigationBar,
             buttons: buttons,
             subView: subView,
@@ -38,7 +41,7 @@ public extension NavigationViewProtocol {
         title: String,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
-        .init(
+        makeView(
             navigationBar: .default(title: title),
             content: content
         )
@@ -48,7 +51,7 @@ public extension NavigationViewProtocol {
         icon: DodamIconography,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
-        .init(
+        makeView(
             navigationBar: .icon(icon: icon),
             content: content
         )
@@ -58,7 +61,7 @@ public extension NavigationViewProtocol {
         title: String,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
-        .init(
+        makeView(
             navigationBar: .small(title: title),
             content: content
         )
@@ -68,7 +71,7 @@ public extension NavigationViewProtocol {
         title: String,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
-        .init(
+        makeView(
             navigationBar: .medium(title: title),
             content: content
         )
@@ -78,7 +81,7 @@ public extension NavigationViewProtocol {
         title: String,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
-        .init(
+        makeView(
             navigationBar: .large(title: title),
             content: content
         )
@@ -87,7 +90,7 @@ public extension NavigationViewProtocol {
     func subView<S: View>(
         @ViewBuilder content: @escaping () -> S
     ) -> Self {
-        .init(
+        Self.makeView(
             navigationBar: self.navigationBar,
             buttons: self.buttons,
             subView: AnyView(content()),
@@ -99,7 +102,7 @@ public extension NavigationViewProtocol {
         icon: DodamIconography,
         action: @escaping () -> Void
     ) -> Self {
-        .init(
+        Self.makeView(
             navigationBar: self.navigationBar,
             buttons: self.buttons + [
                 .init(
