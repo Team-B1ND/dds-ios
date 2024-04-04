@@ -3,17 +3,20 @@ import SwiftUI
 @available(macOS 12, iOS 15, *)
 public struct DodamScrollView<C: View>: NavigationViewProtocol {
     
+    public let borderSize: CGFloat
     public let navigationBar: DodamNavigationBar
     public let buttons: [DodamNavigationBarButton]
     public let subView: AnyView?
     public let content: () -> C
     
     public init(
+        borderSize: CGFloat = 16,
         navigationBar: DodamNavigationBar,
         buttons: [DodamNavigationBarButton] = .init(),
         subView: AnyView? = nil,
         @ViewBuilder content: @escaping () -> C
     ) {
+        self.borderSize = borderSize
         self.navigationBar = navigationBar
         self.buttons = buttons
         self.subView = subView
@@ -34,8 +37,8 @@ public struct DodamScrollView<C: View>: NavigationViewProtocol {
                                 if topInset == nil {
                                     topInset = $0
                                 }
-                                let scrollOffset = $0 - topInset
-                                blueOpacity = max(min(-(scrollOffset / 16), 1), 0)
+                                let scrollOffset = -(($0 - topInset) / borderSize)
+                                blueOpacity = max(min(scrollOffset, 1), 0)
                             }
                     }
                 )

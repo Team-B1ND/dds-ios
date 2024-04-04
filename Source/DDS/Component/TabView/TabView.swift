@@ -4,16 +4,19 @@ import Combine
 @available(macOS 12, iOS 15, *)
 public struct DodamTabView: View {
     
+    private let haptic: UIImpactFeedbackGenerator.FeedbackStyle?
     private let contents: [DodamPage]
     
     public init(
         selection: Binding<Int>? = nil,
+        haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light,
         @DodamPage.Builder contents: () -> [DodamPage]
     ) {
         self.selection = selection
         let selected = selection?.wrappedValue ?? 0
         self.selected = selected
         self.animatedSelection = selected
+        self.haptic = haptic
         self.contents = contents()
     }
     
@@ -37,6 +40,10 @@ public struct DodamTabView: View {
                         let isSelected = animatedSelection == idx
                         if case let .icon(image) = contents[idx].label {
                             Button {
+                                if let haptic {
+                                    UIImpactFeedbackGenerator(style: haptic)
+                                        .impactOccurred()
+                                }
                                 if selected != idx {
                                     selected = idx
                                 }
