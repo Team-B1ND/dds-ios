@@ -16,6 +16,7 @@ public struct DodamTabView: View {
         let selected = selection?.wrappedValue ?? 0
         self.selected = selected
         self.animatedSelection = selected
+        self.loadedViews = [selected]
         self.haptic = haptic
         self.contents = contents()
     }
@@ -24,12 +25,13 @@ public struct DodamTabView: View {
     @State private var selection: Binding<Int>?
     @State private var selected: Int
     @State private var animatedSelection: Int
+    @State private var loadedViews: [Int]
     
     public var body: some View {
         GeometryReader { geometryProxy in
             ScrollViewReader { scrollViewProxy in
                 ForEach(contents.indices, id: \.self) { idx in
-                    if selected == idx {
+                    if selected == idx && loadedViews.contains(idx) {
                         contents[idx].content
                     }
                 }
@@ -87,6 +89,9 @@ public struct DodamTabView: View {
             }
         }
         .onChange(of: selected) { newValue in
+            if !loadedViews.contains(selected) {
+                loadedViews.append(selected)
+            }
             selection?.wrappedValue = newValue
             withAnimation(.spring(duration: 0.2)) {
                 animatedSelection = newValue
