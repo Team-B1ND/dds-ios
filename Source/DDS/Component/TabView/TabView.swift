@@ -34,6 +34,7 @@ public struct DodamTabView: View {
                     ForEach(contents.indices, id: \.self) { idx in
                         if loadedViews.contains(idx) {
                             contents[idx].content
+                                .environment(\.tabViewIdx, idx)
                                 .opacity(selected == idx ? 1 : 0)
                         }
                     }
@@ -54,7 +55,10 @@ public struct DodamTabView: View {
                                         selected = idx
                                     } else {
                                         withAnimation(.spring) {
-                                            scrollViewProxy.scrollTo(-1, anchor: .top)
+                                            scrollViewProxy.scrollTo(
+                                                "ScrollToTop-\(idx)",
+                                                anchor: .top
+                                            )
                                         }
                                     }
                                 } label: {

@@ -37,6 +37,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
         )
     }
     
+    @Environment(\.tabViewIdx) var tabViewIdx: Int?
     @State private var topInset: CGFloat!
     @State private var blueOpacity: CGFloat = 0
     
@@ -60,7 +61,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
                             }
                     }
                 )
-                .id(-1)
+                .id("ScrollToTop-\(tabViewIdx ?? -1)")
         }
         .mask(alignment: .bottom) {
             VStack(spacing: 0) {
