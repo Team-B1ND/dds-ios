@@ -9,13 +9,18 @@ let package = Package(
     products: [
         .library(
             name: "DDS",
-            targets: ["DDS"]),
+            targets: ["DDS"]
+        ),
     ],
     dependencies: [
     ],
     targets: [
         .target(
             name: "DDS",
-            dependencies: [])
+            dependencies: [],
+            resources: [
+                .process("Foundation/Typography/Font")
+            ]
+        )
     ]
 )
