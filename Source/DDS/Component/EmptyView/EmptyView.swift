@@ -66,6 +66,7 @@ public struct DodamEmptyView: View {
             }
             .padding(16)
             .background(Dodam.color(.surface))
+            .registerSUIT()
         }
     }
     return DodamContainerPreview()

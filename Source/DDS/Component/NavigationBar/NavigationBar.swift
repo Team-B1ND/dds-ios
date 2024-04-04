@@ -192,4 +192,5 @@ public struct DodamNavigationBar: View {
             .button(icon: .bell) { }
         Divider()
     }
+    .registerSUIT()
 }

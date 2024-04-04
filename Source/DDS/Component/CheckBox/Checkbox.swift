@@ -66,6 +66,7 @@ public struct Checkbox: View {
             }
             .padding(16)
             .background(Dodam.color(.surface))
+            .registerSUIT()
         }
     }
     return CheckboxPreview()

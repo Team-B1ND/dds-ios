@@ -91,6 +91,7 @@ public struct DodamTopTabView: View {
                 Text("MY")
                     .page(.text("MY"))
             }
+            .registerSUIT()
         }
     }
     return DodamTopTabPreview()

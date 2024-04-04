@@ -82,7 +82,7 @@ public struct DodamButton: View {
             title: title,
             icon: icon,
             action: action,
-            font: .system(size: 14, weight: .regular),
+            font: .suit(size: 14, weight: .regular),
             iconSize: 17,
             height: 28,
             padding: 8
@@ -191,4 +191,5 @@ public struct DodamButton: View {
         )
     }
     .padding()
+    .registerSUIT()
 }

@@ -77,6 +77,7 @@ public struct DodamPageView: View {
             }
             .frame(height: 50)
             .padding()
+            .registerSUIT()
         }
     }
     return DodamPagePreview()

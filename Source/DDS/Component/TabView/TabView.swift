@@ -119,6 +119,7 @@ public struct DodamTabView: View {
                 Text("Menu")
                     .page(.icon(.menu))
             }
+            .registerSUIT()
         }
     }
     return DodamPagePreview()

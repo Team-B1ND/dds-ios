@@ -131,6 +131,7 @@ public struct DodamTextField: View {
                 )
             }
             .padding()
+            .registerSUIT()
         }
     }
     return DodamTextFieldPreview()

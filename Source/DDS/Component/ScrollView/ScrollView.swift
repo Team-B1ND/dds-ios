@@ -43,6 +43,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     public var body: some View {
         ScrollView(showsIndicators: false) {
             content()
+                .frame(maxWidth: .infinity)
                 .padding(.top, -8)
                 .background(
                     GeometryReader { insideProxy in
@@ -95,4 +96,5 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     }
     .button(icon: .plus) { }
     .button(icon: .bell) { }
+    .registerSUIT()
 }

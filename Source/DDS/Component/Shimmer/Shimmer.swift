@@ -45,4 +45,5 @@ public struct DodamShimmer<C: View>: View {
             .frame(width: 100, height: 100)
     }
     .shimmer()
+    .registerSUIT()
 }

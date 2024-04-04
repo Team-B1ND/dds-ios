@@ -38,4 +38,5 @@ public struct DodamNavigationView<C: View>: DodamNavigationViewProtocol {
     }
     .button(icon: .plus) { }
     .button(icon: .bell) { }
+    .registerSUIT()
 }

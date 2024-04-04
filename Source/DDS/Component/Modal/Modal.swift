@@ -103,6 +103,7 @@ public struct DodamModal<C: View, V: View>: View {
             .dodamModal(isPresented: $isPresented) {
                 Text("Presented")
             }
+            .registerSUIT()
         }
     }
     return DodamModalPreview()
@@ -127,6 +128,7 @@ public struct DodamModal<C: View, V: View>: View {
                 DatePicker("", selection: $date)
                     .datePickerStyle(.wheel)
             }
+            .registerSUIT()
         }
     }
     return DodamModalPreview()
