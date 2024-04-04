@@ -30,9 +30,12 @@ public struct DodamTabView: View {
     public var body: some View {
         GeometryReader { geometryProxy in
             ScrollViewReader { scrollViewProxy in
-                ForEach(contents.indices, id: \.self) { idx in
-                    if selected == idx && loadedViews.contains(idx) {
-                        contents[idx].content
+                ZStack {
+                    ForEach(contents.indices, id: \.self) { idx in
+                        if loadedViews.contains(idx) {
+                            contents[idx].content
+                                .opacity(selected == idx ? 1 : 0)
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
