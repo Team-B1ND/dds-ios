@@ -46,11 +46,14 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     GeometryReader { insideProxy in
-                        EmptyView()
-                            .onChange(of: insideProxy.frame(in: .global).minY) {
+                        let yCoordinate = insideProxy.frame(in: .global).minY
+                        Color.clear
+                            .onAppear {
                                 if topInset == nil {
-                                    topInset = $0
+                                    topInset = yCoordinate
                                 }
+                            }
+                            .onChange(of: yCoordinate) {
                                 let scrollOffset = -(($0 - topInset) / (borderSize ?? 16))
                                 blueOpacity = max(min(scrollOffset, 1), 0)
                             }
