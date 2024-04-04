@@ -42,10 +42,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     
     public var body: some View {
         ScrollView(showsIndicators: false) {
-            EmptyView()
-                .id(-1)
             content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     GeometryReader { insideProxy in
                         let yCoordinate = insideProxy.frame(in: .global).minY
@@ -61,6 +58,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
                             }
                     }
                 )
+                .id(-1)
         }
         .mask(alignment: .bottom) {
             VStack(spacing: 0) {

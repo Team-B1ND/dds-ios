@@ -48,7 +48,9 @@ public struct DodamTabView: View {
                                     if selected != idx {
                                         selected = idx
                                     } else {
-                                        scrollViewProxy.scrollTo(-1, anchor: .top)
+                                        withAnimation(.spring) {
+                                            scrollViewProxy.scrollTo(-1, anchor: .top)
+                                        }
                                     }
                                 } label: {
                                     Dodam.icon(image, size: 24)
