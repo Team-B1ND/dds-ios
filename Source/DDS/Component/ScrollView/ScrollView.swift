@@ -42,6 +42,8 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     
     public var body: some View {
         ScrollView(showsIndicators: false) {
+            EmptyView()
+                .id(-1)
             content()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
