@@ -4,16 +4,19 @@ import SwiftUI
 public struct DodamModal<C: View, V: View>: View {
     
     @Binding private var isPresented: Bool
+    private let disableGesture: Bool
     private let content: () -> C
     private let view: () -> V
     
     public init(
         isPresented: Binding<Bool>,
+        disableGesture: Bool,
         @ViewBuilder content: @escaping () -> C,
         @ViewBuilder view: @escaping () -> V
     ) {
         self.animatedPresentation = isPresented.wrappedValue
         self._isPresented = isPresented
+        self.disableGesture = disableGesture
         self.content = content
         self.view = view
     }
@@ -75,7 +78,8 @@ public struct DodamModal<C: View, V: View>: View {
                                             withAnimation(.spring) {
                                                 dragOffset = 0
                                             }
-                                        }
+                                        },
+                                    including: disableGesture ? .subviews : .all
                                 )
                         }
                     }
@@ -98,6 +102,30 @@ public struct DodamModal<C: View, V: View>: View {
             }
             .dodamModal(isPresented: $isPresented) {
                 Text("Presented")
+            }
+        }
+    }
+    return DodamModalPreview()
+}
+
+#Preview {
+    struct DodamModalPreview: View {
+        
+        @State private var isPresented: Bool = false
+        @State private var date: Date = .now
+        
+        var body: some View {
+            DodamButton.medium(
+                title: "Toggle"
+            ) {
+                isPresented.toggle()
+            }
+            .dodamModal(
+                isPresented: $isPresented,
+                disableGesture: true
+            ) {
+                DatePicker("", selection: $date)
+                    .datePickerStyle(.wheel)
             }
         }
     }
