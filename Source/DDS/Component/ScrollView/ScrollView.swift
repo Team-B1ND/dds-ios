@@ -43,6 +43,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     public var body: some View {
         ScrollView(showsIndicators: false) {
             content()
+                .padding(.top, -8)
                 .background(
                     GeometryReader { insideProxy in
                         let yCoordinate = insideProxy.frame(in: .global).minY
@@ -53,7 +54,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
                                 }
                             }
                             .onChange(of: yCoordinate) {
-                                let scrollOffset = -(($0 - topInset) / (borderSize ?? 16))
+                                let scrollOffset = -(($0 - topInset) / (borderSize ?? 0))
                                 blueOpacity = max(min(scrollOffset, 1), 0)
                             }
                     }
@@ -75,6 +76,10 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
         .safeAreaInset(edge: .top) {
             applyBar(bar: navigationBar)
                 .background(.bar.opacity(blueOpacity))
+        }
+        .safeAreaInset(edge: .bottom) {
+            Spacer()
+                .frame(height: 150)
         }
     }
 }
