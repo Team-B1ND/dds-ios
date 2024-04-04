@@ -4,5 +4,5 @@ import SwiftUI
 public protocol DodamTypography {
     
     var size: CGFloat { get }
-    var weight: Font.Weight { get }
+    var weight: SUIT.Weight { get }
 }

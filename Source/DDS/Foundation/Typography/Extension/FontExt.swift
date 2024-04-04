@@ -4,10 +4,14 @@ import SwiftUI
 public extension Font {
     
     init(_ dodamTypography: DodamTypography) {
-        self = .system(
+        self = .suit(
             size: dodamTypography.size,
             weight: dodamTypography.weight
         )
+    }
+    
+    static func suit(size: CGFloat, weight: SUIT.Weight) -> Font {
+        custom(weight.rawValue, size: size)
     }
     
     static func headline(_ type: DodamHeadline) -> Font {

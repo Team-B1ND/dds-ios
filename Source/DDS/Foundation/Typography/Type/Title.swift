@@ -4,7 +4,7 @@ import SwiftUI
 public struct DodamTitle: DodamTypography {
     
     public let size: CGFloat
-    public let weight: Font.Weight
+    public let weight: SUIT.Weight
     
     public static let large: Self  = .init(size: 22, weight: .bold)
     public static let medium: Self = .init(size: 18, weight: .bold)
