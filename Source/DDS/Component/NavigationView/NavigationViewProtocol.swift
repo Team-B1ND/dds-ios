@@ -100,9 +100,11 @@ public extension DodamNavigationViewProtocol {
     
     func button(
         icon: DodamIconography,
+        hidden: Bool = false,
         action: @escaping () -> Void
     ) -> Self {
-        Self.makeView(
+        guard !hidden else { return self }
+        return Self.makeView(
             navigationBar: self.navigationBar,
             buttons: self.buttons + [
                 .init(
