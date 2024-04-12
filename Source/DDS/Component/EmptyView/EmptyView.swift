@@ -1,38 +1,31 @@
 import SwiftUI
 
+@available(macOS 12, iOS 15, *)
 public struct DodamEmptyView: View {
     
-    public enum EmptyType: String {
-        case outGoing = "외출"
-        case outSleeping = "외박"
-        case nightStudy = "심야 자습"
-    }
-    
-    private let emptyType: EmptyType
+    private let title: String
+    private let icon: DodamIconography
+    private let buttonTitle: String
     private let action: () -> Void
     
     public init(
-        _ emptyType: EmptyType,
+        title: String,
+        icon: DodamIconography,
+        buttonTitle: String,
         action: @escaping () -> Void
     ) {
-        self.emptyType = emptyType
+        self.title = title
+        self.icon = icon
+        self.buttonTitle = buttonTitle
         self.action = action
-    }
-    
-    private var icon: Image {
-        switch emptyType {
-        case .outGoing: return .init(icon: .convenienceStore)
-        case .outSleeping: return .init(icon: .tent)
-        case .nightStudy: return .init(icon: .fullMoonFace)
-        }
     }
     
     public var body: some View {
         VStack(spacing: 24) {
             VStack(spacing: 12) {
-                icon
-                .frame(width: 36, height: 36)
-                Text("아직 신청한 \(emptyType.rawValue)이 없어요.")
+                Dodam.icon(icon)
+                    .frame(width: 36, height: 36)
+                Text(title)
                     .font(.label(.large))
                     .dodamColor(.onSurfaceVariant)
             }
@@ -40,7 +33,7 @@ public struct DodamEmptyView: View {
             Button {
                 action()
             } label: {
-                Text("\(emptyType.rawValue) 신청하기")
+                Text(buttonTitle)
                     .font(.body(.large))
                     .dodamColor(.onSecondaryContainer)
                     .padding(.vertical, 14)
@@ -60,9 +53,11 @@ public struct DodamEmptyView: View {
         
         var body: some View {
             VStack(spacing: 20) {
-                DodamEmptyView(.outGoing) {}
-                DodamEmptyView(.outSleeping) {}
-                DodamEmptyView(.nightStudy) {}
+                DodamEmptyView(
+                    title: "아직 신청한 심야 자습이 없어요.",
+                    icon: .fullMoonFace,
+                    buttonTitle: "심야 자습 신청하기"
+                ) { }
             }
             .padding(16)
             .background(Dodam.color(.surface))
