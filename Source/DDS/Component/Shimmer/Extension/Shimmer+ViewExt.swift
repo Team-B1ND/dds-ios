@@ -5,6 +5,10 @@ public extension View {
     
     @ViewBuilder
     func shimmer(_ condition: Bool = true) -> some View {
-        DodamShimmer { self }
+        if condition {
+            DodamShimmer { self }
+        } else {
+            self
+        }
     }
 }
