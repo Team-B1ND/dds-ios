@@ -5,9 +5,7 @@ public extension View {
     
     @ViewBuilder
     func registerSUIT() -> some View {
-        {
-            SUIT.register()
-            return self
-        }()
+        SUIT.register()
+        return self
     }
 }
