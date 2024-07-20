@@ -13,6 +13,8 @@ public struct DodamButton: View {
     private let height: CGFloat
     private let padding: CGFloat?
     private let isDisabled: Bool
+    private let background: DodamColorable
+    private let foreground: DodamColorable
     
     private init(
         title: String,
@@ -22,7 +24,9 @@ public struct DodamButton: View {
         iconSize: CGFloat = 19,
         height: CGFloat = 48,
         padding: CGFloat? = nil,
-        isDisabled: Bool = false
+        isDisabled: Bool = false,
+        background: DodamColorable = DodamColor.Primary.normal,
+        foreground: DodamColorable = DodamColor.Static.white
     ) {
         self.title = title
         self.icon = icon
@@ -32,6 +36,8 @@ public struct DodamButton: View {
         self.height = height
         self.padding = padding
         self.isDisabled = isDisabled
+        self.background = background
+        self.foreground = foreground
     }
     
     public static func fullWidth(
@@ -98,7 +104,39 @@ public struct DodamButton: View {
             iconSize: self.iconSize,
             height: self.height,
             padding: self.padding,
-            isDisabled: condition
+            isDisabled: condition,
+            background: self.background,
+            foreground: self.foreground
+        )
+    }
+    
+    public func background(_ color: DodamColorable) -> Self {
+        .init(
+            title: self.title,
+            icon: self.icon,
+            action: self.action,
+            font: self.font,
+            iconSize: self.iconSize,
+            height: self.height,
+            padding: self.padding,
+            isDisabled: self.isDisabled,
+            background: color,
+            foreground: self.foreground
+        )
+    }
+    
+    public func foreground(_ color: DodamColorable) -> Self {
+        .init(
+            title: self.title,
+            icon: self.icon,
+            action: self.action,
+            font: self.font,
+            iconSize: self.iconSize,
+            height: self.height,
+            padding: self.padding,
+            isDisabled: self.isDisabled,
+            background: self.background,
+            foreground: color
         )
     }
     
@@ -144,10 +182,10 @@ public struct DodamButton: View {
             .frame(height: height)
             .padding(.horizontal, padding)
             .frame(maxWidth: maxWidth)
-            .dodamColor(.onPrimary)
+            .foreground(foreground)
         }
         .disabled(isTranslucent)
-        .background(.tint)
+        .background(background)
         .clipShape(
             RoundedRectangle(cornerRadius: cornerRadius)
         )

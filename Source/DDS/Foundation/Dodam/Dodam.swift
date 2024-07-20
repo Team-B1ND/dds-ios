@@ -16,7 +16,7 @@ public struct Dodam {
             .frame(width: size, height: size)
     }
     
-    public static func color(_ color: DodamColor) -> Color {
-        color.rawValue
+    public static func color(_ color: DodamColorable) -> Color {
+        color.color.rawValue
     }
 }

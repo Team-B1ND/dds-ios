@@ -28,26 +28,21 @@ public struct Checkbox: View {
                         Rectangle()
                             .dodamFill(
                                 type == .primary
-                                ? .primary
-                                : .error
+                                ? DodamColor.Primary.normal
+                                : DodamColor.Status.negative
                             )
                             .frame(width: 18, height: 18)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                         Image(icon: .checkmark)
                             .resizable()
-                            .dodamColor(
-                                type == .primary
-                                ? .onPrimary
-                                : .onError
-                            )
+                            .foreground(DodamColor.Static.white)
                             .padding(4)
                     }
                 } else {
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Dodam.color(.onSurfaceVariant), lineWidth: 2)
+                        .dodamStroke(DodamColor.Line.normal, lineWidth: 2)
                         .frame(width: 18, height: 18)
                 }
-                
             }
             .frame(width: 40, height: 40)
         }
@@ -65,7 +60,7 @@ public struct Checkbox: View {
                 Checkbox(isChecked: $isChecked, type: .error)
             }
             .padding(16)
-            .background(Dodam.color(.surface))
+            .background(DodamColor.Background.normal)
             .registerSUIT()
         }
     }

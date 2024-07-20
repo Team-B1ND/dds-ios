@@ -27,42 +27,41 @@ public struct DodamEmptyView: View {
                     .frame(width: 36, height: 36)
                 Text(title)
                     .font(.label(.large))
-                    .dodamColor(.onSurfaceVariant)
+                    .foreground(DodamColor.Label.alternative)
             }
-            .padding(.top, 16)
-            Button {
+            DodamButton.fullWidth(title: buttonTitle) {
                 action()
-            } label: {
-                Text(buttonTitle)
-                    .font(.body(.large))
-                    .dodamColor(.onSecondaryContainer)
-                    .padding(.vertical, 14)
-                    .frame(maxWidth: .infinity)
             }
-            .background(Dodam.color(.secondaryContainer))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding([.horizontal, .bottom], 16)
+            .background(DodamColor.Fill.normal)
+            .foreground(DodamColor.Label.normal)
         }
-        .background(Dodam.color(.surfaceContainer))
-        .clipShape(RoundedRectangle(cornerRadius: 18))
+        .padding(16)
+        .background(DodamColor.Background.normal)
+        .clipShape(.large)
+    }
+}
+
+private struct DodamContainerPreview: View {
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            DodamEmptyView(
+                title: "아직 신청한 심야 자습이 없어요.",
+                icon: .fullMoonFace,
+                buttonTitle: "심야 자습 신청하기"
+            ) { }
+        }
+        .padding(16)
+        .background(DodamColor.Background.neutral)
+        .registerSUIT()
     }
 }
 
 #Preview {
-    struct DodamContainerPreview: View {
-        
-        var body: some View {
-            VStack(spacing: 20) {
-                DodamEmptyView(
-                    title: "아직 신청한 심야 자습이 없어요.",
-                    icon: .fullMoonFace,
-                    buttonTitle: "심야 자습 신청하기"
-                ) { }
-            }
-            .padding(16)
-            .background(Dodam.color(.surface))
-            .registerSUIT()
-        }
-    }
-    return DodamContainerPreview()
+    DodamContainerPreview()
+}
+
+#Preview {
+    DodamContainerPreview()
+        .preferredColorScheme(.dark)
 }

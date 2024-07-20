@@ -118,13 +118,13 @@ public struct DodamNavigationBar: View {
                             .frame(width: 24, height: 24)
                             .frame(width: 48, height: 48)
                     }
-                    .dodamColor(.onSurface)
+                    .foreground(DodamColor.Label.normal)
                 }
                 if let icon = icon {
                     Dodam.icon(icon)
                         .resizable()
                         .frame(width: 88, height: 22)
-                        .dodamColor(.primary)
+                        .foreground(DodamColor.Primary.normal)
                         .padding(.leading, 16)
                 }
                 if verticalSpacing == nil {
@@ -143,7 +143,8 @@ public struct DodamNavigationBar: View {
                             .frame(width: 28, height: 28)
                             .frame(width: 48, height: 48)
                     }
-                    .dodamColor(.onSurfaceVariant)
+                    .foreground(DodamColor.Label.alternative)
+                    .opacity(0.5)
                 }
             }
             .padding(.trailing, 4)

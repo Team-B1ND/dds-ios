@@ -55,13 +55,7 @@ public struct DodamTextField: View {
     private var isHighlighted: Bool {
         animatedFocusing || !text.isEmpty
     }
-    
-    private var foregroundColor: AnyShapeStyle {
-        isFocused
-        ? .init(Dodam.color(.primary))
-        : .init(Dodam.color(.onSurfaceVariant))
-    }
-    
+      
     public var body: some View {
         VStack(spacing: 12) {
             ZStack(alignment: .leading) {
@@ -89,7 +83,7 @@ public struct DodamTextField: View {
                         } label: {
                             Dodam.icon(.xmarkCircle)
                         }
-                        .dodamColor(.onSurfaceVariant)
+                        .foreground(DodamColor.Label.assistive)
                         .padding(.vertical, -2)
                     }
                 }
@@ -99,7 +93,7 @@ public struct DodamTextField: View {
             Rectangle()
                 .frame(height: 1)
         }
-        .foregroundStyle(foregroundColor)
+        .foreground(isFocused ? DodamColor.Primary.normal : DodamColor.Label.alternative)
         .onChange(of: isFocused) { newValue in
             withAnimation(.spring(duration: 0.1)) {
                 animatedFocusing = newValue
@@ -116,8 +110,8 @@ public struct DodamTextField: View {
 #Preview {
     struct DodamTextFieldPreview: View {
         
-        @State private var idText: String = .init()
-        @State private var pwText: String = .init()
+        @State private var idText = ""
+        @State private var pwText = ""
         
         var body: some View {
             VStack(spacing: 20) {

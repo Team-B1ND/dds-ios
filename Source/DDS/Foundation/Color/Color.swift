@@ -10,41 +10,168 @@ public struct DodamColor: RawRepresentable {
     }
     
     private init(
-        hex: String,
-        dark: String? = nil
+        _ light: Color,
+        _ dark: Color? = nil
     ) {
-        let lightColor = UIColor(hex: hex)
-        if dark == nil {
-            rawValue = Color(lightColor)
-        } else {
-            let darkColor = UIColor(hex: dark!)
-            rawValue = Color(UIColor {
-                if $0.userInterfaceStyle == .dark {
-                    darkColor
-                } else {
-                    lightColor
-                }
-            })
+        guard let dark else {
+            rawValue = light
+            return
+        }
+        rawValue = Color(UIColor {
+            if $0.userInterfaceStyle == .dark {
+                UIColor(dark)
+            } else {
+                UIColor(light)
+            }
+        })
+    }
+    
+    public enum Primary {
+        case normal
+        case alternative
+    }
+    public enum Label {
+        case normal
+        case strong
+        case neutral
+        case alternative
+        case assistive
+        case disable
+    }
+    public enum Line {
+        case normal
+        case neutral
+        case alternative
+    }
+    public enum Fill {
+        case normal
+        case neutral
+        case alternative
+    }
+    public enum Background {
+        case normal
+        case neutral
+        case alternative
+    }
+    public enum Status {
+        case negative
+        case cautionary
+        case positive
+    }
+    public enum Static {
+        case white
+        case black
+    }
+}
+
+extension DodamColor.Primary: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .normal: .init(P.blue45, P.blue45)
+        case .alternative: .init(P.blue45.opacity(0.65), P.blue45.opacity(0.65))
+        }
+    }
+}
+
+extension DodamColor.Label: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .normal: .init(P.neutral5, P.neutral99)
+        case .strong: .init(P.common0, P.common100)
+        case .neutral: .init(P.neutral25, P.neutral95)
+        case .alternative: .init(P.neutral40, P.neutral90)
+        case .assistive: .init(P.neutral50, P.neutral70)
+        case .disable: .init(P.neutral97, P.neutral30)
+        }
+    }
+}
+
+extension DodamColor.Line: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .normal: .init(P.neutral90, P.neutral50)
+        case .neutral: .init(P.neutral95, P.neutral30)
+        case .alternative: .init(P.neutral97, P.neutral25)
+        }
+    }
+}
+
+extension DodamColor.Fill: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .normal: .init(P.neutral99, P.neutral25)
+        case .neutral: .init(P.neutral97, P.neutral25)
+        case .alternative: .init(P.neutral95, P.neutral30)
+        }
+    }
+}
+
+extension DodamColor.Background: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .normal: .init(P.common100, P.neutral15)
+        case .neutral: .init(P.neutral99, P.neutral10)
+        case .alternative: .init(P.neutral99, P.neutral5)
+        }
+    }
+}
+
+extension DodamColor.Status: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .negative: .init(P.red50, P.red50)
+        case .cautionary: .init(P.yellow50, P.yellow60)
+        case .positive: .init(P.green50, P.green60)
+        }
+    }
+}
+
+extension DodamColor.Static: DodamColorable, CaseIterable {
+    public var color: DodamColor {
+        switch self {
+        case .white: .init(P.common100)
+        case .black: .init(P.common0)
+        }
+    }
+}
+
+private extension DodamColorable {
+    var P: DodamPallete {
+        DodamPallete.shared
+    }
+}
+
+public protocol DodamColorable {
+    var color: DodamColor { get }
+}
+
+
+private struct DodamColorPreview: View {
+    
+    func makePreview(_ colors: [DodamColorable]) -> some View {
+        VStack(spacing: 0) {
+            ForEach(colors, id: \.color.rawValue) {
+                $0.color.rawValue.frame(maxWidth: .infinity, maxHeight: 20)
+            }
         }
     }
     
-    public static let primary: Self                 = .init(hex: "#0083F0")
-    public static let onPrimary: Self               = .init(hex: "#FFFFFF")
-    public static let error: Self                   = .init(hex: "#EF2B2A")
-    public static let onError: Self                 = .init(hex: "#FFFFFF")
-    public static let secondary: Self               = .init(hex: "#EFEFEF", dark: "#3F3F3F")
-    public static let tertiary: Self                = .init(hex: "#616161", dark: "#555555")
-    public static let secondaryContainer: Self      = .init(hex: "#EFEFEF", dark: "#3F3F3F")
-    public static let onSecondaryContainer: Self    = .init(hex: "#3F3F3F", dark: "#C8C8C8")
-    public static let surface: Self                 = .init(hex: "#F2F5F8", dark: "#111111")
-    public static let onSurface: Self               = .init(hex: "#111111", dark: "#FFFFFF")
-    public static let background: Self              = .init(hex: "#FFFFFF", dark: "#1A1A1A")
-    public static let onBackground: Self            = .init(hex: "#111111", dark: "#FFFFFF")
-    public static let surfaceContainer: Self        = .init(hex: "#FFFFFF", dark: "#1F1F1F")
-    public static let onSurfaceVariant: Self        = .init(hex: "#B7B7B7", dark: "#777777")
-    public static let outline: Self                 = .init(hex: "#DFDFDF", dark: "#555555")
-    public static let outlineVariant: Self          = .init(hex: "#EFEFEF", dark: "#383838")
-    public static let surfaceContainerLow: Self     = .init(hex: "#FFFFFF", dark: "#616161")
-    public static let surfaceContainerHigh: Self    = .init(hex: "#FFFFFF", dark: "#1F1F1F")
-    public static let surfaceContainerHighest: Self = .init(hex: "#F5F5F5", dark: "#383838")
+    var body: some View {
+        makePreview(DodamColor.Primary.allCases)
+        makePreview(DodamColor.Label.allCases)
+        makePreview(DodamColor.Line.allCases)
+        makePreview(DodamColor.Fill.allCases)
+        makePreview(DodamColor.Background.allCases)
+        makePreview(DodamColor.Status.allCases)
+        makePreview(DodamColor.Static.allCases)
+    }
+}
+
+#Preview {
+    DodamColorPreview()
+}
+
+#Preview {
+    DodamColorPreview()
+        .preferredColorScheme(.dark)
 }

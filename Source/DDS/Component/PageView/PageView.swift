@@ -30,13 +30,7 @@ public struct DodamPageView: View {
             HStack(spacing: 5) {
                 ForEach(contents.indices, id: \.self) { idx in
                     Circle()
-                        .fill({ () -> AnyShapeStyle in
-                            if selected == idx {
-                                .init(.tint)
-                            } else {
-                                .init(Dodam.color(.tertiary))
-                            }
-                        }())
+                        .dodamFill(selected == idx ? DodamColor.Background.normal : DodamColor.Background.alternative)
                         .frame(width: 5, height: 5)
                 }
             }

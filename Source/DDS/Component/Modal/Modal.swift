@@ -43,7 +43,7 @@ public struct DodamModal<C: View, V: View>: View {
                                 isPresented = false
                             }
                         if animatedPresentation {
-                            Dodam.color(.background)
+                            DodamColor.Background.normal.color.rawValue
                                 .frame(height: -min(dragOffset, 0))
                             let bottomSafeArea = geometryProxy.safeAreaInsets.bottom
                             content()
@@ -53,7 +53,7 @@ public struct DodamModal<C: View, V: View>: View {
                                     bottomSafeArea == 0 ? 24 : bottomSafeArea
                                 )
                                 .frame(maxWidth: .infinity)
-                                .background(Dodam.color(.background))
+                                .background(DodamColor.Background.normal)
                                 .clipShape(DodamModalShape())
                                 .offset(y: dragOffset)
                                 .transition(.move(edge: .bottom))

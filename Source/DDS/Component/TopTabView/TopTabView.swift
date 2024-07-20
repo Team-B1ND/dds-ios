@@ -36,12 +36,11 @@ public struct DodamTopTabView: View {
                             VStack(spacing: 12) {
                                 Text(string)
                                     .font(.body(.large))
-                                    .dodamColor(
-                                        isSelected ? .onSurface : .onSurfaceVariant
-                                    )
+                                    .foreground(DodamColor.Label.normal)
+                                    .opacity(isSelected ? 1 : 0.5)
                                 Group {
                                     if isSelected {
-                                        Dodam.color(.onSurface)
+                                        DodamColor.Label.normal.color.rawValue
                                             .matchedGeometryEffect(
                                                 id: 0,
                                                 in: animation

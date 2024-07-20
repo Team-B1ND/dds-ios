@@ -23,19 +23,19 @@ public struct DodamLinearProgressView: View {
     
     @State private var animatedProgress: CGFloat = 0
     
-    private var foregroundColor: AnyShapeStyle {
-        isDisabled ? .init(Dodam.color(.onSurfaceVariant)) : .init(.tint)
+    private var foregroundColor: DodamColorable {
+        isDisabled ? DodamColor.Line.normal : DodamColor.Primary.normal
     }
     
     public var body: some View {
         GeometryReader { geometryProxy in
             ZStack(alignment: .leading) {
                 Capsule()
-                    .dodamColor(.secondary)
+                    .foreground(DodamColor.Line.alternative)
                 let width = geometryProxy.size.width
                 Capsule()
                     .frame(width: width * animatedProgress)
-                    .foregroundStyle(foregroundColor)
+                    .foreground(foregroundColor)
             }
         }
         .frame(height: 14)

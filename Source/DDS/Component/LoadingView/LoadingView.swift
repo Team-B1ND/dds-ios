@@ -10,8 +10,10 @@ public struct DodamLoadingView: View {
     public var body: some View {
         HStack(spacing: 8) {
             ForEach(0..<3) { idx in
+                let opacity = loadingState == idx ? 1 : 0.1
                 Circle()
-                    .dodamFill(idx != loadingState ? .tertiary : .secondary)
+                    .dodamFill(DodamColor.Label.alternative)
+                    .opacity(opacity)
                     .frame(width: 8, height: 8)
             }
         }

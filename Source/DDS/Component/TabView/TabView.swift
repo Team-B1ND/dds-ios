@@ -64,9 +64,7 @@ public struct DodamTabView: View {
                                 } label: {
                                     Dodam.icon(image, size: 24)
                                         .padding(8)
-                                        .dodamColor(
-                                            isSelected ? .onPrimary : .onSurface
-                                        )
+                                        .foreground(isSelected ? DodamColor.Static.white : DodamColor.Label.strong)
                                 }
                                 .background(
                                     Group {
@@ -85,7 +83,7 @@ public struct DodamTabView: View {
                         }
                     }
                     .padding(.vertical, 12)
-                    .background(Dodam.color(.surfaceContainer))
+                    .background(DodamColor.Background.normal)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding(.horizontal, 16)
                     .padding(
@@ -113,26 +111,33 @@ public struct DodamTabView: View {
     }
 }
 
-#Preview {
-    struct DodamPagePreview: View {
-        
-        @State private var selection: Int = 0
-        
-        var body: some View {
-            DodamTabView(selection: $selection) {
-                Text("Home")
-                    .page(.icon(.home))
-                Text("Meal")
-                    .page(.icon(.forkAndKnife))
-                Text("Out")
-                    .page(.icon(.doorOpen))
-                Text("NightStudy")
-                    .page(.icon(.moonPlus))
-                Text("Menu")
-                    .page(.icon(.menu))
-            }
-            .registerSUIT()
+
+private struct DodamPagePreview: View {
+    @State private var selection: Int = 0
+    
+    var body: some View {
+        DodamTabView(selection: $selection) {
+            Text("Home")
+                .page(.icon(.home))
+            Text("Meal")
+                .page(.icon(.forkAndKnife))
+            Text("Out")
+                .page(.icon(.doorOpen))
+            Text("NightStudy")
+                .page(.icon(.moonPlus))
+            Text("Menu")
+                .page(.icon(.menu))
         }
+        .registerSUIT()
+        .background(DodamColor.Background.neutral)
     }
-    return DodamPagePreview()
+}
+
+#Preview {
+    DodamPagePreview()
+}
+
+#Preview {
+    DodamPagePreview()
+        .preferredColorScheme(.dark)
 }
