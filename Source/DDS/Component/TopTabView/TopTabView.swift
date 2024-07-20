@@ -35,7 +35,7 @@ public struct DodamTopTabView: View {
                         } label: {
                             VStack(spacing: 12) {
                                 Text(string)
-                                    .font(.body(.large))
+                                    .font(.headline(.medium))
                                     .foreground(DodamColor.Label.normal)
                                     .opacity(isSelected ? 1 : 0.5)
                                 Group {
@@ -78,20 +78,25 @@ public struct DodamTopTabView: View {
     }
 }
 
-#Preview {
-    struct DodamTopTabPreview: View {
-        
-        @State private var selection: Int = 0
-        
-        var body: some View {
-            DodamTopTabView(selection: $selection) {
-                Text("대기중")
-                    .page(.text("대기중"))
-                Text("MY")
-                    .page(.text("MY"))
-            }
-            .registerSUIT()
+private struct DodamTopTabPreview: View {
+    @State private var selection: Int = 0
+    
+    var body: some View {
+        DodamTopTabView(selection: $selection) {
+            Text("대기중")
+                .page(.text("대기중"))
+            Text("MY")
+                .page(.text("MY"))
         }
+        .registerSUIT()
     }
-    return DodamTopTabPreview()
+}
+
+#Preview {
+    DodamTopTabPreview()
+}
+
+#Preview {
+    DodamTopTabPreview()
+        .preferredColorScheme(.dark)
 }

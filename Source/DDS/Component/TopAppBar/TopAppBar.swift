@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public struct DodamNavigationBar: View {
+public struct DodamTopAppBar: View {
     
     private let title: String
     private let font: Font
@@ -9,16 +9,16 @@ public struct DodamNavigationBar: View {
     private let verticalSpacing: CGFloat?
     private let showBackButton: Bool
     private let subView: AnyView?
-    private let buttons: [DodamNavigationBarButton]
+    private let buttons: [DodamTopAppBarButton]
     
     private init(
         title: String = "",
-        font: Font = .headline(.small),
+        font: Font = .title3(.bold),
         icon: DodamIconography? = nil,
         verticalSpacing: CGFloat? = nil,
         showBackButton: Bool = true,
         subView: AnyView? = nil,
-        buttons: [DodamNavigationBarButton] = .init()
+        buttons: [DodamTopAppBarButton] = []
     ) {
         self.title = title
         self.font = font
@@ -46,7 +46,7 @@ public struct DodamNavigationBar: View {
     public static func small(title: String) -> Self {
         .init(
             title: title,
-            font: .body(.large)
+            font: .headline(.bold)
         )
     }
     
@@ -60,7 +60,7 @@ public struct DodamNavigationBar: View {
     public static func large(title: String) -> Self {
         .init(
             title: title,
-            font: .headline(.medium),
+            font: .title2(.bold),
             verticalSpacing: 48
         )
     }
@@ -173,22 +173,22 @@ public struct DodamNavigationBar: View {
 #Preview {
     VStack {
         Divider()
-        DodamNavigationBar.default(title: "Default")
+        DodamTopAppBar.default(title: "Default")
             .button(icon: .plus) { }
             .button(icon: .bell) { }
         Divider()
-        DodamNavigationBar.icon(icon: .logo)
+        DodamTopAppBar.icon(icon: .logo)
             .button(icon: .bell) { }
         Divider()
-        DodamNavigationBar.small(title: "Small")
+        DodamTopAppBar.small(title: "Small")
             .button(icon: .plus) { }
             .button(icon: .bell) { }
         Divider()
-        DodamNavigationBar.medium(title: "Medium")
+        DodamTopAppBar.medium(title: "Medium")
             .button(icon: .plus) { }
             .button(icon: .bell) { }
         Divider()
-        DodamNavigationBar.large(title: "Large")
+        DodamTopAppBar.large(title: "Large")
             .button(icon: .plus) { }
             .button(icon: .bell) { }
         Divider()

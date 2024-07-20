@@ -7,7 +7,7 @@ public struct DodamHeadline: DodamTypography {
     public let weight: SUIT.Weight
     public let lineHeight: Double = 1.5
     
-    public static let large: Self  = .init(weight: .extrabold)
+    public static let bold: Self  = .init(weight: .extrabold)
     public static let medium: Self = .init(weight: .medium)
-    public static let small: Self  = .init(weight: .regular)
+    public static let regular: Self  = .init(weight: .regular)
 }

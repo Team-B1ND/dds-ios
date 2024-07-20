@@ -4,21 +4,21 @@ import SwiftUI
 public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     
     public let borderSize: CGFloat?
-    public let navigationBar: DodamNavigationBar
-    public let buttons: [DodamNavigationBarButton]
+    public let topAppBar: DodamTopAppBar
+    public let buttons: [DodamTopAppBarButton]
     public let subView: AnyView?
     public let content: () -> C
     
     public static func makeView(
         borderSize: CGFloat? = nil,
-        navigationBar: DodamNavigationBar,
-        buttons: [DodamNavigationBarButton] = .init(),
+        topAppBar: DodamTopAppBar,
+        buttons: [DodamTopAppBarButton] = [],
         subView: AnyView? = nil,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         .init(
             borderSize: borderSize,
-            navigationBar: navigationBar,
+            topAppBar: topAppBar,
             buttons: buttons,
             subView: subView,
             content: content
@@ -30,7 +30,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     ) -> Self {
         Self.makeView(
             borderSize: size,
-            navigationBar: self.navigationBar,
+            topAppBar: self.topAppBar,
             buttons: self.buttons,
             subView: self.subView,
             content: self.content
@@ -76,7 +76,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
             .ignoresSafeArea()
         }
         .safeAreaInset(edge: .top) {
-            applyBar(bar: navigationBar)
+            applyBar(bar: topAppBar)
                 .background(.bar.opacity(blueOpacity))
         }
         .safeAreaInset(edge: .bottom) {

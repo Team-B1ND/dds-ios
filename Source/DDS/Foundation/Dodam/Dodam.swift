@@ -3,6 +3,8 @@ import SwiftUI
 @available(macOS 12, iOS 15, *)
 public struct Dodam {
     
+    private init() {}
+    
     public static func icon(_ icon: DodamIconography) -> Image {
         .init(icon: icon)
     }

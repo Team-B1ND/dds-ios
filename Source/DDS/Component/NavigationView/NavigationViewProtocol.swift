@@ -5,15 +5,15 @@ public protocol DodamNavigationViewProtocol: View {
     
     associatedtype C: View
     
-    var navigationBar: DodamNavigationBar { get }
-    var buttons: [DodamNavigationBarButton] { get }
+    var topAppBar: DodamTopAppBar { get }
+    var buttons: [DodamTopAppBarButton] { get }
     var subView: AnyView? { get }
     var content: () -> C { get }
     
     static func makeView(
         borderSize: CGFloat?,
-        navigationBar: DodamNavigationBar,
-        buttons: [DodamNavigationBarButton],
+        topAppBar: DodamTopAppBar,
+        buttons: [DodamTopAppBarButton],
         subView: AnyView?,
         @ViewBuilder content: @escaping () -> C
     ) -> Self
@@ -23,14 +23,14 @@ public extension DodamNavigationViewProtocol {
     
     static func makeView(
         borderSize: CGFloat? = nil,
-        navigationBar: DodamNavigationBar,
-        buttons: [DodamNavigationBarButton] = .init(),
+        topAppBar: DodamTopAppBar,
+        buttons: [DodamTopAppBarButton] = [],
         subView: AnyView? = nil,
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
             borderSize: borderSize,
-            navigationBar: navigationBar,
+            topAppBar: topAppBar,
             buttons: buttons,
             subView: subView,
             content: content
@@ -42,7 +42,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
-            navigationBar: .default(title: title),
+            topAppBar: .default(title: title),
             content: content
         )
     }
@@ -52,7 +52,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
-            navigationBar: .icon(icon: icon),
+            topAppBar: .icon(icon: icon),
             content: content
         )
     }
@@ -62,7 +62,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
-            navigationBar: .small(title: title),
+            topAppBar: .small(title: title),
             content: content
         )
     }
@@ -72,7 +72,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
-            navigationBar: .medium(title: title),
+            topAppBar: .medium(title: title),
             content: content
         )
     }
@@ -82,7 +82,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
         makeView(
-            navigationBar: .large(title: title),
+            topAppBar: .large(title: title),
             content: content
         )
     }
@@ -91,7 +91,7 @@ public extension DodamNavigationViewProtocol {
         @ViewBuilder content: @escaping () -> S
     ) -> Self {
         Self.makeView(
-            navigationBar: self.navigationBar,
+            topAppBar: self.topAppBar,
             buttons: self.buttons,
             subView: AnyView(content()),
             content: self.content
@@ -105,7 +105,7 @@ public extension DodamNavigationViewProtocol {
     ) -> Self {
         guard !hidden else { return self }
         return Self.makeView(
-            navigationBar: self.navigationBar,
+            topAppBar: self.topAppBar,
             buttons: self.buttons + [
                 .init(
                     icon: icon,
@@ -118,9 +118,9 @@ public extension DodamNavigationViewProtocol {
     }
     
     func applyBar(
-        bar: DodamNavigationBar,
+        bar: DodamTopAppBar,
         index: Int = 0
-    ) -> DodamNavigationBar {
+    ) -> DodamTopAppBar {
         if !buttons.isEmpty {
             let item = buttons[index]
             let result = bar

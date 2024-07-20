@@ -26,7 +26,7 @@ public struct DodamEmptyView: View {
                 Dodam.icon(icon)
                     .frame(width: 36, height: 36)
                 Text(title)
-                    .font(.label(.large))
+                    .font(.label(.medium))
                     .foreground(DodamColor.Label.alternative)
             }
             DodamButton.fullWidth(title: buttonTitle) {
