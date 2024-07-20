@@ -35,7 +35,7 @@ public struct DodamTopTabView: View {
                         } label: {
                             VStack(spacing: 12) {
                                 Text(string)
-                                    .font(.headline(.medium))
+                                    .headline(.medium)
                                     .foreground(DodamColor.Label.normal)
                                     .opacity(isSelected ? 1 : 0.5)
                                 Group {

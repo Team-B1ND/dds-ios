@@ -89,7 +89,7 @@ public struct DodamTextField: View {
                 }
             }
             .frame(height: 41, alignment: .bottomLeading)
-            .font(.body(.medium))
+            .body(.medium)
             Rectangle()
                 .frame(height: 1)
         }
