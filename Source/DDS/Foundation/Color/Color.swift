@@ -47,6 +47,7 @@ public struct DodamColor: RawRepresentable {
         case normal
         case neutral
         case alternative
+        case assistive
     }
     public enum Background {
         case normal
@@ -102,6 +103,7 @@ extension DodamColor.Fill: DodamColorable, CaseIterable {
         case .normal: .init(P.neutral99, P.neutral25)
         case .neutral: .init(P.neutral97, P.neutral25)
         case .alternative: .init(P.neutral95, P.neutral30)
+        case .assistive: .init(P.common100, P.neutral60)
         }
     }
 }

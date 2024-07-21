@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-public struct SegmentedButton: View {
+public struct DodamSegmentedButton: View {
     
     private let labels: [String]
     
@@ -22,7 +22,7 @@ public struct SegmentedButton: View {
     @State private var animatedSelection: Int
     
     public var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 0) {
             ForEach(Array(labels.enumerated()), id: \.offset) { idx, label in
                 let isSelected = animatedSelection == idx
                 Button {
@@ -39,7 +39,7 @@ public struct SegmentedButton: View {
                 .background {
                     if isSelected {
                         RoundedRectangle(cornerRadius: 10)
-                            .dodamFill(DodamColor.Background.normal)
+                            .dodamFill(DodamColor.Fill.assistive)
                             .matchedGeometryEffect(
                                 id: 0,
                                 in: animation
@@ -52,9 +52,9 @@ public struct SegmentedButton: View {
                             )
                     }
                 }
-                .padding(4)
             }
         }
+        .padding(4)
         .frame(maxWidth: .infinity)
         .background(DodamColor.Fill.neutral)
         .clipShape(.medium)
@@ -74,8 +74,23 @@ public struct SegmentedButton: View {
     }
 }
 
-#Preview {
-    SegmentedButton(labels: ["외출", "외박"], selection: .constant(0))
-        .padding(.horizontal, 16)
+private struct SegmentedButtonPreview: View {
+    var body: some View {
+        VStack {
+            DodamSegmentedButton(labels: ["외출", "외박"], selection: .constant(1))
+                .padding(.horizontal, 16)
+            DodamSegmentedButton(labels: ["외출", "외박"], selection: .constant(0))
+                .padding(.horizontal, 16)
+        }
         .registerSUIT()
+    }
+}
+
+#Preview {
+   SegmentedButtonPreview()
+}
+
+#Preview {
+    SegmentedButtonPreview()
+        .preferredColorScheme(.dark)
 }

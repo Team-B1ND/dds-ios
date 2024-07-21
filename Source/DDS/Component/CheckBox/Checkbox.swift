@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public struct Checkbox: View {
+public struct DodamCheckbox: View {
     
     public enum CheckType {
         case primary, error
@@ -62,9 +62,9 @@ public struct Checkbox: View {
         
         var body: some View {
             VStack(spacing: 20) {
-                Checkbox(isChecked: $isChecked)
-                Checkbox(isChecked: $isChecked, type: .error)
-                Checkbox(isChecked: $isChecked, isDisabled: true)
+                DodamCheckbox(isChecked: $isChecked)
+                DodamCheckbox(isChecked: $isChecked, type: .error)
+                DodamCheckbox(isChecked: $isChecked, isDisabled: true)
             }
             .padding(16)
             .background(DodamColor.Background.normal)
