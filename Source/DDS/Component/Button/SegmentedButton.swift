@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-struct SegmentedButton: View {
+public struct SegmentedButton: View {
     
     private let labels: [String]
     
@@ -21,7 +21,7 @@ struct SegmentedButton: View {
     @State private var selected: Int
     @State private var animatedSelection: Int
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 8) {
             ForEach(Array(labels.enumerated()), id: \.offset) { idx, label in
                 let isSelected = animatedSelection == idx
