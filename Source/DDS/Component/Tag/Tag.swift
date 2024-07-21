@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct Tag: View {
+public struct DodamTag: View {
     
     public enum TagType {
         case primary
@@ -53,9 +53,9 @@ private struct TagPreview: View {
     
     var body: some View {
         VStack {
-            Tag("승인됨", type: .primary)
-            Tag("대기 중", type: .secondary)
-            Tag("거절됨", type: .negative)
+            DodamTag("승인됨", type: .primary)
+            DodamTag("대기 중", type: .secondary)
+            DodamTag("거절됨", type: .negative)
         }
         .background(DodamColor.Background.normal)
     }
