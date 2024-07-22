@@ -19,7 +19,8 @@ let package = Package(
             name: "DDS",
             dependencies: [],
             resources: [
-                .process("Foundation/Typography/Font")
+                .process("Foundation/Typography/Font"),
+                .process("Foundation/Iconography/Iconography.xcassets")
             ]
         )
     ]
