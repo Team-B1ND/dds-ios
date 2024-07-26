@@ -32,8 +32,7 @@ public struct DodamEmptyView: View {
             DodamButton.fullWidth(title: buttonTitle) {
                 action()
             }
-            .background(DodamColor.Fill.normal)
-            .foreground(DodamColor.Label.normal)
+            .role(.assistive)
         }
         .padding(16)
         .background(DodamColor.Background.normal)
