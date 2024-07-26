@@ -48,9 +48,9 @@ extension DodamButton.ButtonType {
     
     var font: Font {
         switch self {
-        case .cta: .body(.medium)
-        case .large: .body(.medium)
-        case .medium: .body(.medium)
+        case .cta: .body1(.medium)
+        case .large: .body1(.medium)
+        case .medium: .body1(.medium)
         case .small: .label(.medium)
         }
     }

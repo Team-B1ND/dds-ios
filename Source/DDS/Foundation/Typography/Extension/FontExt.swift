@@ -38,7 +38,7 @@ public extension Font {
         .init(type)
     }
     
-    static func body(_ type: DodamBody) -> Font {
+    static func body1(_ type: DodamBody1) -> Font {
         .init(type)
     }
     

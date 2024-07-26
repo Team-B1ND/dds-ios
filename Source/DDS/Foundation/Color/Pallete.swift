@@ -10,7 +10,8 @@ public struct DodamPallete {
     
     // MARK: - Neutral
     public let neutral5 = Color(0x0F0F10)
-    public let neutral10 = Color(0x111212)
+    public let neutral7 = Color(0x111212)
+    public let neutral10 = Color(0x191A1A)
     public let neutral15 = Color(0x232424)
     public let neutral20 = Color(0x2A2B2C)
     public let neutral25 = Color(0x383A3B)

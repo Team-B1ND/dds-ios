@@ -29,6 +29,7 @@ public struct DodamColor: RawRepresentable {
     public enum Primary {
         case normal
         case alternative
+        case assistive
     }
     public enum Label {
         case normal
@@ -70,6 +71,7 @@ extension DodamColor.Primary: DodamColorable, CaseIterable {
         switch self {
         case .normal: .init(P.blue45, P.blue45)
         case .alternative: .init(P.blue45.opacity(0.65), P.blue45.opacity(0.65))
+        case .assistive: .init(P.blue45.opacity(0.2), P.blue45.opacity(0.2))
         }
     }
 }
@@ -100,7 +102,7 @@ extension DodamColor.Line: DodamColorable, CaseIterable {
 extension DodamColor.Fill: DodamColorable, CaseIterable {
     public var color: DodamColor {
         switch self {
-        case .normal: .init(P.neutral99, P.neutral25)
+        case .normal: .init(P.neutral99, P.neutral20)
         case .neutral: .init(P.neutral97, P.neutral25)
         case .alternative: .init(P.neutral95, P.neutral30)
         case .assistive: .init(P.common100, P.neutral60)
@@ -113,7 +115,7 @@ extension DodamColor.Background: DodamColorable, CaseIterable {
         switch self {
         case .normal: .init(P.common100, P.neutral15)
         case .neutral: .init(P.neutral99, P.neutral10)
-        case .alternative: .init(P.neutral99, P.neutral5)
+        case .alternative: .init(P.neutral99, P.neutral7)
         }
     }
 }

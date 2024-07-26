@@ -7,7 +7,7 @@ public struct DodamLabel: DodamTypography {
     public let weight: SUIT.Weight
     public let lineHeight: Double = 1.4
     
-    public static let bold: Self  = .init(weight: .bold)
+    public static let bold: Self  = .init(weight: .semibold)
     public static let medium: Self = .init(weight: .medium)
     public static let regular: Self  = .init(weight: .regular)
 }

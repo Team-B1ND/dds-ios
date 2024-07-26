@@ -42,8 +42,8 @@ public extension View {
             .lineSpacing(type.lineHeight - 1)
     }
     
-    func body(_ type: DodamBody) -> some View {
-        self.font(.body(type))
+    func body1(_ type: DodamBody1) -> some View {
+        self.font(.body1(type))
             .lineSpacing(type.lineHeight - 1)
     }
     

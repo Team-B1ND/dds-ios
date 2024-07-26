@@ -36,7 +36,7 @@ public struct DodamTag: View {
     
     public var body: some View {
         Text(title)
-            .body(.bold)
+            .body1(.bold)
             .foreground(DodamColor.Static.white)
             .padding(.horizontal, 12)
             .padding(.vertical, 4)
