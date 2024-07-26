@@ -9,7 +9,7 @@ public extension View {
     }
 }
 
-private struct FontWithLineHeight: ViewModifier {
+private struct DodamFontViewModifier: ViewModifier {
     let font: DodamTypography
     let uiFont: UIFont
     
@@ -31,7 +31,7 @@ private struct FontWithLineHeight: ViewModifier {
 public extension View {
     
     private func dodamFont(_ type: DodamTypography) -> some View {
-        self.modifier(FontWithLineHeight(font: type))
+        self.modifier(DodamFontViewModifier(font: type))
     }
     
     func title1(_ type: DodamTitle1) -> some View {
