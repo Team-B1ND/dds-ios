@@ -14,50 +14,59 @@ public struct DodamTextButton: View {
     
     private let type: TextButtonType
     private let title: String
+    private let color: DodamColorable
     private let action: AsyncAction
     private let isDisabled: Bool
     
     private init(
         type: TextButtonType,
         title: String,
+        color: DodamColorable,
         action: @escaping AsyncAction,
         isDisabled: Bool = false
     ) {
         self.type = type
         self.title = title
+        self.color = color
         self.action = action
         self.isDisabled = isDisabled
     }
     
-    public static func fullWidth(
+    public static func large(
         title: String,
+        color: DodamColorable = DodamColor.Label.strong,
         action: @escaping AsyncAction
     ) -> Self {
         .init(
             type: .large,
             title: title,
+            color: color,
             action: action
         )
     }
     
     public static func medium(
         title: String,
+        color: DodamColorable = DodamColor.Label.strong,
         action: @escaping AsyncAction
     ) -> Self {
         .init(
             type: .medium,
             title: title,
+            color: color,
             action: action
         )
     }
     
     public static func small(
         title: String,
+        color: DodamColorable = DodamColor.Label.strong,
         action: @escaping AsyncAction
     ) -> Self {
         .init(
             type: .small,
             title: title,
+            color: color,
             action: action
         )
     }
@@ -66,6 +75,7 @@ public struct DodamTextButton: View {
         .init(
             type: self.type,
             title: self.title,
+            color: self.color,
             action: self.action,
             isDisabled: condition
         )
@@ -92,7 +102,7 @@ public struct DodamTextButton: View {
                 .opacity(isPerformingTask ? 0 : 1)
                 .padding(.horizontal, type.horizontalPadding)
                 .padding(.vertical, type.verticalPadding)
-                .foreground(DodamColor.Label.strong)
+                .foreground(color)
         }
         .disabled(isTranslucent)
         .opacity(isTranslucent ? 0.5 : 1)
@@ -108,16 +118,15 @@ private struct ButtonPreview: View {
     
     func makePreview(role: DodamButton.ButtonRole) -> some View {
         let title = "Button"
-        let icon = Dodam.icon(.plus)
         let action: () async -> Void = {
             try? await Task.sleep(nanoseconds: 1_000_000_000)
         }
         return VStack(alignment: .leading) {
-            DodamTextButton.fullWidth(
+            DodamTextButton.large(
                 title: title,
                 action: action
             )
-            DodamTextButton.fullWidth(
+            DodamTextButton.large(
                 title: title,
                 action: action
             )
