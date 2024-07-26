@@ -1,69 +1,19 @@
 import SwiftUI
 
-extension DodamButton.ButtonType {
-    var shape: DodamShape {
-        switch self {
-        case .cta: .small
-        case .large: .small
-        case .medium: .small
-        case .small: .extraSmall
-        }
-    }
-    
-    var height: CGFloat {
-        switch self {
-        case .cta: 48
-        case .large: 44
-        case .medium: 40
-        case .small: 36
-        }
-    }
-    
-    var horizontalPadding: CGFloat {
-        switch self {
-        case .cta: 12
-        case .large: 12
-        case .medium: 8
-        case .small: 8
-        }
-    }
-    
-    var iconSize: CGFloat {
-        switch self {
-        case .cta: 20
-        case .large: 20
-        case .medium: 18
-        case .small: 14
-        }
-    }
-    
-    var titleHorizontalPadding: CGFloat {
-        switch self {
-        case .cta: 8
-        case .large: 8
-        case .medium: 6
-        case .small: 4
-        }
-    }
-    
-    var font: Font {
-        switch self {
-        case .cta: .body1(.medium)
-        case .large: .body1(.medium)
-        case .medium: .body1(.medium)
-        case .small: .label(.medium)
-        }
-    }
-}
 
 @available(macOS 12, iOS 15, *)
 public struct DodamButton: View {
     
     public enum ButtonType {
-        case cta
         case large
         case medium
         case small
+    }
+    
+    public enum ButtonRole {
+        case primary
+        case secondary
+        case assistive
     }
     
     public typealias AsyncAction = () async -> Void
@@ -74,8 +24,7 @@ public struct DodamButton: View {
     private let trailingIcon: Image?
     private let action: AsyncAction
     private let isDisabled: Bool
-    private let background: DodamColorable
-    private let foreground: DodamColorable
+    private let role: ButtonRole
     
     private init(
         type: ButtonType,
@@ -84,8 +33,7 @@ public struct DodamButton: View {
         trailingIcon: Image?,
         action: @escaping AsyncAction,
         isDisabled: Bool = false,
-        background: DodamColorable = DodamColor.Primary.normal,
-        foreground: DodamColorable = DodamColor.Static.white
+        role: ButtonRole = .primary
     ) {
         self.type = type
         self.title = title
@@ -93,26 +41,10 @@ public struct DodamButton: View {
         self.trailingIcon = trailingIcon
         self.action = action
         self.isDisabled = isDisabled
-        self.background = background
-        self.foreground = foreground
+        self.role = role
     }
     
     public static func fullWidth(
-        title: String,
-        leadingIcon: Image? = nil,
-        trailingIcon: Image? = nil,
-        action: @escaping AsyncAction
-    ) -> Self {
-        .init(
-            type: .cta,
-            title: title,
-            leadingIcon: leadingIcon,
-            trailingIcon: trailingIcon,
-            action: action
-        )
-    }
-    
-    public static func large(
         title: String,
         leadingIcon: Image? = nil,
         trailingIcon: Image? = nil,
@@ -165,12 +97,11 @@ public struct DodamButton: View {
             trailingIcon: self.trailingIcon,
             action: self.action,
             isDisabled: condition,
-            background: self.background,
-            foreground: self.foreground
+            role: self.role
         )
     }
     
-    public func background(_ color: DodamColorable) -> Self {
+    public func role(_ role: ButtonRole) -> Self {
         .init(
             type: self.type,
             title: self.title,
@@ -178,28 +109,14 @@ public struct DodamButton: View {
             trailingIcon: self.trailingIcon,
             action: self.action,
             isDisabled: self.isDisabled,
-            background: color,
-            foreground: self.foreground
-        )
-    }
-    
-    public func foreground(_ color: DodamColorable) -> Self {
-        .init(
-            type: self.type,
-            title: self.title,
-            leadingIcon: self.leadingIcon,
-            trailingIcon: self.trailingIcon,
-            action: self.action,
-            isDisabled: self.isDisabled,
-            background: self.background,
-            foreground: color
+            role: role
         )
     }
     
     @State private var isPerformingTask: Bool = false
     
     private var maxWidth: CGFloat? {
-        guard type != .cta else { return .infinity }
+        guard type != .large else { return .infinity }
         return nil
     }
     
@@ -217,7 +134,7 @@ public struct DodamButton: View {
                 isPerformingTask = false
             }
         } label: {
-            HStack(spacing: 0) {
+            HStack(spacing: type.horizontalSpacing) {
                 if let leadingIcon {
                     leadingIcon
                         .resizable()
@@ -226,7 +143,6 @@ public struct DodamButton: View {
                 }
                 Text(title)
                     .font(type.font)
-                    .padding(.horizontal, type.titleHorizontalPadding)
                 if let trailingIcon {
                     trailingIcon
                         .resizable()
@@ -238,10 +154,10 @@ public struct DodamButton: View {
             .frame(height: type.height)
             .padding(.horizontal, type.horizontalPadding)
             .frame(maxWidth: maxWidth)
-            .foreground(foreground)
+            .foreground(role.foreground)
         }
         .disabled(isTranslucent)
-        .background(background)
+        .background(role.background)
         .clipShape(type.shape)
         .opacity(isTranslucent ? 0.5 : 1)
         .background {
@@ -253,35 +169,69 @@ public struct DodamButton: View {
 }
 
 private struct ButtonPreview: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            let title = "로그인"
-            let icon = Dodam.icon(.home)
-            let action: () async -> Void = {
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
-            }
+    
+    func makePreview(role: DodamButton.ButtonRole) -> some View {
+        let title = "Button"
+        let icon = Dodam.icon(.plus)
+        let action: () async -> Void = {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+        return VStack(alignment: .leading) {
             DodamButton.fullWidth(
                 title: title,
                 leadingIcon: icon,
                 trailingIcon: icon,
                 action: action
             )
-            DodamButton.large(
+            .role(role)
+            DodamButton.fullWidth(
                 title: title,
                 leadingIcon: icon,
                 trailingIcon: icon,
                 action: action
             )
+            .disabled()
+            .role(role)
             DodamButton.medium(
                 title: title,
                 leadingIcon: icon,
+                trailingIcon: icon,
                 action: action
             )
+            .role(role)
+            DodamButton.medium(
+                title: title,
+                leadingIcon: icon,
+                trailingIcon: icon,
+                action: action
+            )
+            .disabled()
+            .role(role)
             DodamButton.small(
                 title: title,
                 leadingIcon: icon,
+                trailingIcon: icon,
                 action: action
             )
+            .role(role)
+            DodamButton.small(
+                title: title,
+                leadingIcon: icon,
+                trailingIcon: icon,
+                action: action
+            )
+            .disabled()
+            .role(role)
+        }
+    }
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                makePreview(role: .primary)
+                makePreview(role: .secondary)
+                makePreview(role: .assistive)
+            }
         }
         .padding()
         .registerSUIT()
