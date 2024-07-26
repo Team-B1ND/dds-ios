@@ -42,6 +42,10 @@ public extension Font {
         .init(type)
     }
     
+    static func body2(_ type: DodamBody2) -> Font {
+        .init(type)
+    }
+    
     static func label(_ type: DodamLabel) -> Font {
         .init(type)
     }

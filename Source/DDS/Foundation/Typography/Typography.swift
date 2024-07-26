@@ -7,3 +7,10 @@ public protocol DodamTypography {
     var weight: SUIT.Weight { get }
     var lineHeight: Double { get } // percent
 }
+
+extension DodamTypography {
+    
+    var calcedLineHeight: Double {
+        size * lineHeight
+    }
+}
