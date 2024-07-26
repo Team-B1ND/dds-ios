@@ -193,5 +193,5 @@ public struct DodamTopAppBar: View {
             .button(icon: .bell) { }
         Divider()
     }
-    .registerSUIT()
+    .registerPretendard()
 }

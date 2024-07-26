@@ -4,7 +4,7 @@ import SwiftUI
 public protocol DodamTypography {
     
     var size: CGFloat { get }
-    var weight: SUIT.Weight { get }
+    var weight: Pretendard.Weight { get }
     var lineHeight: Double { get } // percentage
 }
 

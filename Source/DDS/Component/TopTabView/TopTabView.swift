@@ -88,7 +88,7 @@ private struct DodamTopTabPreview: View {
             Text("MY")
                 .page(.text("MY"))
         }
-        .registerSUIT()
+        .registerPretendard()
     }
 }
 

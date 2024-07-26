@@ -83,7 +83,7 @@ public struct DodamCircularProgressView: View {
                     .tint(.gray)
             }
             .padding()
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DodamCircularProgressPreview()

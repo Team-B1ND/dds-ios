@@ -103,7 +103,7 @@ public struct DodamSheet<C: View, V: View>: View {
             .dodamSheet(isPresented: $isPresented) {
                 Text("Presented")
             }
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DodamSheetPreview()
@@ -128,7 +128,7 @@ public struct DodamSheet<C: View, V: View>: View {
                 DatePicker("", selection: $date)
                     .datePickerStyle(.wheel)
             }
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DodamSheetPreview()

@@ -4,7 +4,7 @@ import SwiftUI
 public struct DodamHeading2: DodamTypography {
     
     public let size: CGFloat = 20
-    public let weight: SUIT.Weight
+    public let weight: Pretendard.Weight
     public let lineHeight: Double = 1.4
     
     public static let bold: Self  = .init(weight: .extrabold)

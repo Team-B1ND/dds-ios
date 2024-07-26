@@ -4,13 +4,13 @@ import SwiftUI
 public extension Font {
     
     init(_ dodamTypography: DodamTypography) {
-        self = .suit(
+        self = .pretendard(
             size: dodamTypography.size,
             weight: dodamTypography.weight
         )
     }
     
-    static func suit(size: CGFloat, weight: SUIT.Weight) -> Font {
+    static func pretendard(size: CGFloat, weight: Pretendard.Weight) -> Font {
         custom(weight.rawValue, fixedSize: size)
     }
     

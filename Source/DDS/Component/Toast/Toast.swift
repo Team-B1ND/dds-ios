@@ -86,7 +86,7 @@ public struct DodamToast<C: View, V: View>: View {
             ) {
                 Text("Hello, world!")
             }
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DodamToastPreview()

@@ -1,19 +1,19 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public struct SUIT {
+public struct Pretendard {
     
     public enum Weight: String, CaseIterable {
         
-        case regular = "SUIT-Regular"
-        case medium = "SUIT-Medium"
-        case semibold = "SUIT-SemiBold"
-        case bold = "SUIT-Bold"
-        case extrabold = "SUIT-ExtraBold"
+        case regular = "Pretendard-Regular"
+        case medium = "Pretendard-Medium"
+        case semibold = "Pretendard-SemiBold"
+        case bold = "Pretendard-Bold"
+        case extrabold = "Pretendard-ExtraBold"
     }
     
     public static func register() {
-        SUIT.Weight.allCases.forEach {
+        Pretendard.Weight.allCases.forEach {
             guard let fontURL = Bundle.module.url(
                 forResource: $0.rawValue,
                 withExtension: "otf"

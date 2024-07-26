@@ -52,7 +52,7 @@ private struct DodamContainerPreview: View {
         }
         .padding(16)
         .background(DodamColor.Background.neutral)
-        .registerSUIT()
+        .registerPretendard()
     }
 }
 

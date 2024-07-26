@@ -97,5 +97,5 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     }
     .button(icon: .plus) { }
     .button(icon: .bell) { }
-    .registerSUIT()
+    .registerPretendard()
 }

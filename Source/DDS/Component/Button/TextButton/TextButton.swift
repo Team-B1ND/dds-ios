@@ -161,7 +161,7 @@ private struct ButtonPreview: View {
             }
         }
         .padding()
-        .registerSUIT()
+        .registerPretendard()
     }
 }
 

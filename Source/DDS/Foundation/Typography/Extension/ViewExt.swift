@@ -3,8 +3,8 @@ import SwiftUI
 @available(macOS 12, iOS 15, *)
 public extension View {
     
-    func registerSUIT() -> some View {
-        SUIT.register()
+    func registerPretendard() -> some View {
+        Pretendard.register()
         return self
     }
 }
@@ -81,7 +81,7 @@ public extension View {
 
 #Preview {
     let str = "스마트 스쿨 플랫폼 도담도담도담\n바인드는 우주 최강 동아리입니다"
-    SUIT.register()
+    Pretendard.register()
     return (
         ScrollView {
             VStack(spacing: 44) {
@@ -191,7 +191,7 @@ public extension View {
 
 #Preview {
     VStack {
-        let _ = SUIT.register()
+        let _ = Pretendard.register()
         let headline = DodamHeadline(weight: .bold)
         let font = Font(headline)
         let uiFont = UIFont.uiFontGuide(headline)

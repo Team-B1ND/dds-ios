@@ -128,7 +128,7 @@ private struct DodamPagePreview: View {
             Text("Menu")
                 .page(.icon(.menu))
         }
-        .registerSUIT()
+        .registerPretendard()
         .background(DodamColor.Background.neutral)
     }
 }

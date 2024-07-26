@@ -109,7 +109,7 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
                     }
                 }
             }
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DialogPreview()

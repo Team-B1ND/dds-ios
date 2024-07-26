@@ -33,5 +33,5 @@ public struct DodamLoadingView: View {
 
 #Preview {
     DodamLoadingView()
-        .registerSUIT()
+        .registerPretendard()
 }

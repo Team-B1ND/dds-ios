@@ -82,7 +82,7 @@ private struct SegmentedButtonPreview: View {
             DodamSegmentedButton(labels: ["외출", "외박"], selection: .constant(0))
                 .padding(.horizontal, 16)
         }
-        .registerSUIT()
+        .registerPretendard()
     }
 }
 

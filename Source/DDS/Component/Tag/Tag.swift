@@ -48,7 +48,7 @@ public struct DodamTag: View {
 private struct TagPreview: View {
     
     init() {
-        SUIT.register()
+        Pretendard.register()
     }
     
     var body: some View {

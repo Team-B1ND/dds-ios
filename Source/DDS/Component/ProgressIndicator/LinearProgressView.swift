@@ -62,7 +62,7 @@ public struct DodamLinearProgressView: View {
                     .tint(.gray)
             }
             .padding()
-            .registerSUIT()
+            .registerPretendard()
         }
     }
     return DodamLinearProgressPreview()
