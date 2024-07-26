@@ -4,12 +4,12 @@ import SwiftUI
 public extension View {
     
     @ViewBuilder
-    func dodamModal<C: View>(
+    func dodamSheet<C: View>(
         isPresented: Binding<Bool>,
         disableGesture: Bool = false,
         @ViewBuilder content: @escaping () -> C
     ) -> some View {
-        DodamModal(
+        DodamSheet(
             isPresented: isPresented,
             disableGesture: disableGesture,
             content: content

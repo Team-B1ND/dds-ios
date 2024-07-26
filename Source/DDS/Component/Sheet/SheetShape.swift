@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-struct DodamModalShape: Shape {
+struct DodamSheetShape: Shape {
     
     let radius: CGFloat = 20
     

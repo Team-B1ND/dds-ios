@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 12, iOS 15, *)
-public struct DodamModal<C: View, V: View>: View {
+public struct DodamSheet<C: View, V: View>: View {
     
     @Binding private var isPresented: Bool
     private let disableGesture: Bool
@@ -54,7 +54,7 @@ public struct DodamModal<C: View, V: View>: View {
                                 )
                                 .frame(maxWidth: .infinity)
                                 .background(DodamColor.Background.normal)
-                                .clipShape(DodamModalShape())
+                                .clipShape(DodamSheetShape())
                                 .offset(y: dragOffset)
                                 .transition(.move(edge: .bottom))
                                 .zIndex(1)
@@ -90,7 +90,7 @@ public struct DodamModal<C: View, V: View>: View {
 }
 
 #Preview {
-    struct DodamModalPreview: View {
+    struct DodamSheetPreview: View {
         
         @State private var isPresented: Bool = false
         
@@ -100,17 +100,17 @@ public struct DodamModal<C: View, V: View>: View {
             ) {
                 isPresented.toggle()
             }
-            .dodamModal(isPresented: $isPresented) {
+            .dodamSheet(isPresented: $isPresented) {
                 Text("Presented")
             }
             .registerSUIT()
         }
     }
-    return DodamModalPreview()
+    return DodamSheetPreview()
 }
 
 #Preview {
-    struct DodamModalPreview: View {
+    struct DodamSheetPreview: View {
         
         @State private var isPresented: Bool = false
         @State private var date: Date = .now
@@ -121,7 +121,7 @@ public struct DodamModal<C: View, V: View>: View {
             ) {
                 isPresented.toggle()
             }
-            .dodamModal(
+            .dodamSheet(
                 isPresented: $isPresented,
                 disableGesture: true
             ) {
@@ -131,5 +131,5 @@ public struct DodamModal<C: View, V: View>: View {
             .registerSUIT()
         }
     }
-    return DodamModalPreview()
+    return DodamSheetPreview()
 }
