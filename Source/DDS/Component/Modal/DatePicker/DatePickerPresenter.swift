@@ -3,7 +3,7 @@ import SwiftUI
 public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
     @StateObject private var provider: DatePickerProvider
     @State private var size: CGSize = .zero
-    @State private var monthDate: Date = .now
+    
     private let calendar = {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "ko-KR")
@@ -25,12 +25,12 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
     }
     
     private var range: Int? {
-        calendar.range(of: .day, in: .month, for: monthDate)?.count
+        calendar.range(of: .day, in: .month, for: provider.monthDate)?.count
     }
     
     private var weeks: [[Date?]] {
         // 해당 월의 첫째 날
-        var components = calendar.dateComponents([.year, .month], from: monthDate)
+        var components = calendar.dateComponents([.year, .month], from: provider.monthDate)
         components.day = 1
         let firstDayOfMonth = calendar.date(from: components)!
         
@@ -65,6 +65,12 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
         return false
     }
     
+    private func equals(_ d1: Date, _ d2: Date) -> Bool {
+        let startComponents = calendar.dateComponents([.year, .month, .day], from: d1)
+        let endComponents = calendar.dateComponents([.year, .month, .day], from: d2)
+        return startComponents == endComponents
+    }
+    
     public var body: some View {
             BaseModal(
                 isPresent: $provider.isPresent,
@@ -87,7 +93,7 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                     .clipShape(.extraLarge)
                 }
             }
-            .animation(.spring, value: monthDate)
+            .animation(.spring, value: provider.monthDate)
     }
     
     @ViewBuilder
@@ -99,16 +105,16 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 8) {
                 Text(
-                    String(calendar.dateComponents([.year], from: monthDate).year ?? 0)
+                    String(calendar.dateComponents([.year], from: provider.monthDate).year ?? 0)
                     + "년 "
-                    + String(calendar.dateComponents([.month], from: monthDate).month ?? 0)
+                    + String(calendar.dateComponents([.month], from: provider.monthDate).month ?? 0)
                     + "월")
                     .body1(.medium)
                     .foreground(DodamColor.Label.strong)
                 Spacer()
                 Button {
-                    if let date = calendar.date(byAdding: .month, value: -1, to: monthDate) {
-                        self.monthDate = date
+                    if let date = calendar.date(byAdding: .month, value: -1, to: provider.monthDate) {
+                        provider.monthDate = date
                     }
                 } label: {
                     Image(icon: .chevronLeft)
@@ -118,8 +124,8 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                         .padding(8)
                 }
                 Button {
-                    if let date = calendar.date(byAdding: .month, value: 1, to: monthDate) {
-                        self.monthDate = date
+                    if let date = calendar.date(byAdding: .month, value: 1, to: provider.monthDate) {
+                        provider.monthDate = date
                     }
                 } label: {
                     Image(icon: .chevronRight)
@@ -130,7 +136,7 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                 }
             }
         }
-        .animation(.none, value: monthDate)
+        .animation(.none, value: provider.monthDate)
     }
     
     @ViewBuilder
@@ -145,16 +151,17 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                         .frame(maxWidth: .infinity)
                 }
             }
+            Spacer().frame(height: 4)
             // days
             ForEach(weeks, id: \.self) { week in
                 HStack(spacing: 0) {
-                    ForEach(week, id: \.self) { day in
+                    ForEach(Array(week.enumerated()), id: \.offset) { idx, day in
                         let enabled = isEnabled(
                             day ?? .now,
                             between: datePicker.startDate,
                             and: datePicker.endDate
                         )
-                        let selected = day == provider.date
+                        let selected = day == nil ? false : equals(day!, provider.date)
                         Button {
                             provider.date = day ?? .now
                         } label: {
@@ -187,7 +194,17 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                 }
             }
         }
-        .animation(.none, value: monthDate)
+        .animation(.none, value: provider.monthDate)
+        .onChange(of: weeks) { _ in
+            print("=================")
+            weeks.forEach { dates in
+                dates.forEach { day in
+                    print(day)
+                }
+                print("----")
+            }
+            print("=================")
+        }
     }
 }
 

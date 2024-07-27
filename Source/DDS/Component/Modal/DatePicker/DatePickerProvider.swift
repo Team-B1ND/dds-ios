@@ -11,6 +11,7 @@ public final class DatePickerProvider: ModalProvider {
     @Published var isPresent = false
     
     @Published public var date: Date = .now
+    @Published public var monthDate: Date = .now
     
     @Published var datePicker: DatePicker?
     
@@ -22,6 +23,7 @@ public final class DatePickerProvider: ModalProvider {
         self.isPresent = true
         
         self.date = .now
+        self.monthDate = .now
         
         self.datePicker = datePicker
     }
