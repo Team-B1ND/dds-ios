@@ -16,7 +16,9 @@ public final class TimePickerProvider: ModalProvider {
     @Published var minute: Int = 0
     @Published var action: () -> Void = {}
     
-    func present(
+    public init() {}
+    
+    public func present(
         _ title: String,
         action: @escaping () -> Void
     ) {

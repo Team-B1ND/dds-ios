@@ -16,6 +16,8 @@ public final class DatePickerProvider: ModalProvider {
     @Published var endDate: Date?
     @Published var action: () -> Void = {}
     
+    public init() {}
+    
     public func present(
         _ title: String,
         startDate: Date?,
