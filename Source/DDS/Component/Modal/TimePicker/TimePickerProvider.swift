@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 public final class TimePickerProvider: ModalProvider {
-    @Published public var isPresent: Bool = false
+    @Published var isPresent: Bool = false
+    
     @Published var title: String = ""
     @Published var hour: Int = 0
     @Published var minute: Int = 0

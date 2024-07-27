@@ -2,13 +2,12 @@ import SwiftUI
 
 public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
     
-    public typealias P = TimePickerProvider
+    private let hours = Array(0..<24)
+    private let minutes = Array(0..<60)
+    
     @StateObject private var provider: TimePickerProvider
     @State private var size: CGSize = .zero
     let content: () -> C
-    
-    private let hours = Array(0..<24)
-    private let minutes = Array(0..<60)
     
     init(
         provider: TimePickerProvider,

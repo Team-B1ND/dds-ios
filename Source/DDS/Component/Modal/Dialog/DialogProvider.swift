@@ -1,8 +1,8 @@
 import Foundation
 
 public final class DialogProvider: ObservableObject, ModalProvider {
+    @Published var isPresent = false
     
-    @Published public var isPresent = false
     @Published var title: String = ""
     @Published var message: String?
     @Published var secondaryButton: DialogButton?

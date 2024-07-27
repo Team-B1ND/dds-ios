@@ -3,7 +3,6 @@ import Combine
 
 public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
     
-    public typealias P = DialogProvider
     @StateObject private var provider: DialogProvider
     
     let content: () -> C
