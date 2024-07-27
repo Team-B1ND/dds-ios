@@ -10,8 +10,8 @@ struct BaseModal<MC: View, C: View>: View {
     let backgroundColor: DodamColorable = DodamColor.Background.normal
     let cornerRadius: CGFloat = 16
 //    let shadow: SeugiShadowSystem = .evBlack(.ev1)
-    @ViewBuilder let modalContent: () -> MC
     @ViewBuilder let content: () -> C
+    @ViewBuilder let modalContent: () -> MC
     
     var body: some View {
         ZStack {
