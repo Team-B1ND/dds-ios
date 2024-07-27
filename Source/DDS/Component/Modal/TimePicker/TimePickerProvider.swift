@@ -11,21 +11,21 @@ import SwiftUI
 public final class TimePickerProvider: ModalProvider {
     @Published var isPresent: Bool = false
     
-    @Published var title: String = ""
-    @Published var hour: Int = 0
-    @Published var minute: Int = 0
-    @Published var action: () -> Void = {}
+    @Published public var hour: Int = 0
+    @Published public var minute: Int = 0
+    
+    @Published var timePicker: TimePicker?
     
     public init() {}
     
     public func present(
-        _ title: String,
-        action: @escaping () -> Void
+        _ timePicker: TimePicker
     ) {
-        self.title = title
+        self.isPresent = true
+        
         self.hour = 0
         self.minute = 0
-        self.action = action
-        self.isPresent = true
+        
+        self.timePicker = timePicker
     }
 }

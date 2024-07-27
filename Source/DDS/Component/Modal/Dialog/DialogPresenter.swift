@@ -24,61 +24,63 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
             isPresent: $provider.isPresent,
             content: content
         ) {
-            VStack(spacing: 18) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(provider.title)
-                            .heading1(.bold)
-                            .foreground(DodamColor.Label.strong)
-                        if let message = provider.message {
-                            Text(message)
-                                .body1(.medium)
-                                .foreground(DodamColor.Label.alternative)
+            if let dialog = provider.dialog {
+                VStack(spacing: 18) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text(dialog.title)
+                                .heading1(.bold)
+                                .foreground(DodamColor.Label.strong)
+                            if let message = dialog.message {
+                                Text(message)
+                                    .body1(.medium)
+                                    .foreground(DodamColor.Label.alternative)
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
-                }
-                .padding(6)
-                HStack(spacing: 8) {
-                    if let secondaryButton = provider.secondaryButton {
-                        if let primaryButton = provider.primaryButton {
-                            DodamButton.fullWidth(title: secondaryButton.title) {
-                                secondaryButton.action()
-                                dismiss()
-                            }
-                            .role(.assistive)
-                            DodamButton.fullWidth(title: primaryButton.title) {
-                                primaryButton.action()
-                                dismiss()
-                            }
-                        } else {
-                            HStack {
-                                Spacer()
-                                DodamTextButton.large(title: secondaryButton.title) {
+                    .padding(6)
+                    HStack(spacing: 8) {
+                        if let secondaryButton = dialog.secondaryButton {
+                            if let primaryButton = dialog.primaryButton {
+                                DodamButton.fullWidth(title: secondaryButton.title) {
                                     secondaryButton.action()
                                     dismiss()
                                 }
-                            }
-                        }
-                    } else {
-                        HStack {
-                            Spacer()
-                            if let primaryButton = provider.primaryButton {
-                                DodamTextButton.large(title: primaryButton.title) {
+                                .role(.assistive)
+                                DodamButton.fullWidth(title: primaryButton.title) {
                                     primaryButton.action()
                                     dismiss()
                                 }
                             } else {
-                                DodamTextButton.large(title: "닫기", color: DodamColor.Primary.normal) {
-                                    dismiss()
+                                HStack {
+                                    Spacer()
+                                    DodamTextButton.large(title: secondaryButton.title) {
+                                        secondaryButton.action()
+                                        dismiss()
+                                    }
+                                }
+                            }
+                        } else {
+                            HStack {
+                                Spacer()
+                                if let primaryButton = dialog.primaryButton {
+                                    DodamTextButton.large(title: primaryButton.title) {
+                                        primaryButton.action()
+                                        dismiss()
+                                    }
+                                } else {
+                                    DodamTextButton.large(title: "닫기", color: DodamColor.Primary.normal) {
+                                        dismiss()
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                .padding(18)
+                .frame(width: 328)
             }
-            .padding(18)
-            .frame(width: 328)
         }
     }
 }
@@ -90,18 +92,34 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
             DodamDialogPresenter(provider: provider) {
                 VStack {
                     Button("Show 1") {
-                        provider.present("제목을 입력해주세요")
-                            .message("본문을 입력해주세요")
-                            .primaryButton("확인") {
-                                //
-                            }
-                            .secondaryButton("취소") {
-                                //
-                            }
+                        provider.present(
+                            .init(
+                                title: "제목을 입력해주세요",
+                                message: "본문을 입력해주세요",
+                                secondaryButton: .init("확인") {
+                                    
+                                },
+                                primaryButton: .init("취소") {
+                                    
+                                }
+                            )
+                        )
                     }
                     Button("Show 2") {
-                        provider.present("제목을 입력해주세요")
-                            .message("본문을 입력해주세요")
+                        provider.present(
+                            .init(
+                                title: "제목을 입력해주세요",
+                                message: "본문을 입력해주세요"
+                            )
+                        )
+                    }
+                    Button("Show 3") {
+                        provider.present(
+                            .init(title: "와우")
+                            .primaryButton("Hello") {
+                                print("WOW")
+                            }
+                        )
                     }
                 }
             }

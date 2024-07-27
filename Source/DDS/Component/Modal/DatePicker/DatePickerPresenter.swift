@@ -66,32 +66,34 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
     }
     
     public var body: some View {
-        BaseModal(
-            isPresent: $provider.isPresent,
-            content: content
-        ) {
-            VStack(spacing: 16) {
-                header
-                calendarView
-                HStack {
-                    Spacer()
-                    DodamTextButton.large(title: "선택", color: DodamColor.Primary.normal) {
-                        provider.action()
-                        dismiss()
+            BaseModal(
+                isPresent: $provider.isPresent,
+                content: content
+            ) {
+                if let datePicker = provider.datePicker {
+                    VStack(spacing: 16) {
+                        makeHeader(datePicker: datePicker)
+                        makeCalendarView(datePicker: datePicker)
+                        HStack {
+                            Spacer()
+                            DodamTextButton.large(title: "선택", color: DodamColor.Primary.normal) {
+                                datePicker.action()
+                                dismiss()
+                            }
+                        }
                     }
+                    .padding(24)
+                    .frame(width: 328)
+                    .clipShape(.extraLarge)
                 }
             }
-            .padding(24)
-            .frame(width: 328)
-            .clipShape(.extraLarge)
-        }
-        .animation(.spring, value: monthDate)
+            .animation(.spring, value: monthDate)
     }
     
     @ViewBuilder
-    private var header: some View {
+    private func makeHeader(datePicker: DatePicker) -> some View {
         VStack(spacing: 4) {
-            Text(provider.title)
+            Text(datePicker.title)
                 .heading2(.bold)
                 .foreground(DodamColor.Label.strong)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -132,7 +134,7 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
     }
     
     @ViewBuilder
-    private var calendarView: some View {
+    private func makeCalendarView(datePicker: DatePicker) -> some View {
         VStack(spacing: 0) {
             // header
             HStack(spacing: 0) {
@@ -149,8 +151,8 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
                     ForEach(week, id: \.self) { day in
                         let enabled = isEnabled(
                             day ?? .now,
-                            between: provider.startDate ?? .now,
-                            and: provider.endDate ?? .now
+                            between: datePicker.startDate,
+                            and: datePicker.endDate
                         )
                         let selected = day == provider.date
                         Button {
@@ -197,17 +199,17 @@ private struct DatePickerPreview: View {
         DodamDatePickerPresenter(provider: provider) {
             VStack {
                 Button("Show") {
-                    provider.present(
-                        "외출 일시",
+                    provider.present(.init(
+                        title: "외출 일시",
                         startDate: .now,
                         endDate: {
                             var d = Date.now
                             d = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: d)!
                             return d
-                        }()
-                    ) {
-                        print("Hello")
-                    }
+                        }()) {
+                            print("Hello")
+                        }
+                    )
                 }
             }
         }

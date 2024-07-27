@@ -125,7 +125,7 @@ public struct DodamSheet<C: View, V: View>: View {
                 isPresented: $isPresented,
                 disableGesture: true
             ) {
-                DatePicker("", selection: $date)
+                SwiftUI.DatePicker("", selection: $date)
                     .datePickerStyle(.wheel)
             }
             .registerPretendard()
