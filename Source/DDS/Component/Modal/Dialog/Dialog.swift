@@ -27,10 +27,10 @@ public struct Dialog {
     }
     
     public func secondaryButton(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(title: title, message: message, primaryButton: primaryButton, secondaryButton: .init(title, action: action))
+        .init(title: self.title, message: self.message, primaryButton: self.primaryButton, secondaryButton: .init(title, action: action))
     }
     
     public func primaryButton(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(title: title, message: message, primaryButton: .init(title, action: action), secondaryButton: secondaryButton)
+        .init(title: self.title, message: self.message, primaryButton: .init(title, action: action), secondaryButton: self.secondaryButton)
     }
 }
