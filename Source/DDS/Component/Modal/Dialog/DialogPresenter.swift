@@ -99,12 +99,10 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
                             .secondaryButton("취소") {
                                 //
                             }
-                            .show()
                     }
                     Button("Show 2") {
                         provider.present("제목을 입력해주세요")
                             .message("본문을 입력해주세요")
-                            .show()
                     }
                 }
             }
