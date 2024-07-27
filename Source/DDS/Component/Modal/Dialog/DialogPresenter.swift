@@ -55,7 +55,7 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
                             } else {
                                 HStack {
                                     Spacer()
-                                    DodamTextButton.large(title: secondaryButton.title) {
+                                    DodamTextButton.large(title: secondaryButton.title, color: DodamColor.Primary.normal) {
                                         secondaryButton.action()
                                         dismiss()
                                     }
@@ -65,7 +65,7 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
                             HStack {
                                 Spacer()
                                 if let primaryButton = dialog.primaryButton {
-                                    DodamTextButton.large(title: primaryButton.title) {
+                                    DodamTextButton.large(title: primaryButton.title, color: DodamColor.Primary.normal) {
                                         primaryButton.action()
                                         dismiss()
                                     }
@@ -96,10 +96,10 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
                             .init(
                                 title: "제목을 입력해주세요",
                                 message: "본문을 입력해주세요",
-                                secondaryButton: .init("확인") {
+                                primaryButton: .init("확인") {
                                     
                                 },
-                                primaryButton: .init("취소") {
+                                secondaryButton: .init("취소") {
                                     
                                 }
                             )

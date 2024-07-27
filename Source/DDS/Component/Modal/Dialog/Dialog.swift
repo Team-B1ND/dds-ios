@@ -17,8 +17,8 @@ public struct Dialog {
     public init(
         title: String,
         message: String? = nil,
-        secondaryButton: DialogButton? = nil,
-        primaryButton: DialogButton? = nil
+        primaryButton: DialogButton? = nil,
+        secondaryButton: DialogButton? = nil
     ) {
         self.title = title
         self.message = message
@@ -27,10 +27,10 @@ public struct Dialog {
     }
     
     public func secondaryButton(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(title: title, message: message, secondaryButton: .init(title, action: action), primaryButton: primaryButton)
+        .init(title: title, message: message, primaryButton: primaryButton, secondaryButton: .init(title, action: action))
     }
     
     public func primaryButton(_ title: String, action: @escaping () -> Void) -> Self {
-        .init(title: title, message: message, secondaryButton: secondaryButton, primaryButton: .init(title, action: action))
+        .init(title: title, message: message, primaryButton: .init(title, action: action), secondaryButton: secondaryButton)
     }
 }
