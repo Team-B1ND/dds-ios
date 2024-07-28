@@ -11,8 +11,7 @@ import SwiftUI
 public final class TimePickerProvider: ModalProvider {
     @Published var isPresent: Bool = false
     
-    @Published public var hour: Int = 0
-    @Published public var minute: Int = 0
+    @Published public var date: Date = .now
     
     @Published var timePicker: TimePicker?
     
@@ -20,13 +19,11 @@ public final class TimePickerProvider: ModalProvider {
     
     public func present(
         _ timePicker: TimePicker,
-        hour: Int = 0,
-        minute: Int = 0
+        date: Date = .now
     ) {
         self.isPresent = true
         
-        self.hour = hour
-        self.minute = minute
+        self.date = date
         
         self.timePicker = timePicker
     }

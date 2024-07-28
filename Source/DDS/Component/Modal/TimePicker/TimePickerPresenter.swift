@@ -2,6 +2,11 @@ import SwiftUI
 
 public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
     
+    private let calendar = {
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: "ko-KR")
+        return calendar
+    }()
     private let hours = Array(0..<24)
     private let minutes = Array(0..<60)
     
@@ -15,6 +20,18 @@ public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
     ) {
         self._provider = .init(wrappedValue: provider)
         self.content = content
+    }
+    
+    private var hour: Int? {
+        components.hour
+    }
+    
+    private var minute: Int? {
+        components.minute
+    }
+    
+    private var components: DateComponents {
+        calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: provider.date)
     }
     
     func dismiss() {
@@ -35,11 +52,19 @@ public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
                     HStack(spacing: 0) {
                         SnapScrollView(
                             Array(hours.enumerated()),
-                            selection: $provider.hour,
+                            selection: .init {
+                                hour ?? 0
+                            } set: { hour in
+                                var components = components
+                                components.hour = hour
+                                if let date = calendar.date(from: components) {
+                                    provider.date = date
+                                }
+                            },
                             spacing: 12,
                             showItemCount: 5
                         ) { idx, item in
-                            let selected = idx == provider.hour
+                            let selected = idx == hour
                             Text("\(item)")
                                 .title3(.medium)
                                 .foreground(
@@ -55,11 +80,19 @@ public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
                             .foreground(DodamColor.Label.normal)
                         SnapScrollView(
                             Array(minutes.enumerated()),
-                            selection: $provider.minute,
+                            selection: .init {
+                                minute ?? 0
+                            } set: { minute in
+                                var components = components
+                                components.minute = minute
+                                if let date = calendar.date(from: components) {
+                                    provider.date = date
+                                }
+                            },
                             spacing: 12,
                             showItemCount: 5
                         ) { idx, item in
-                            let selected = idx == provider.minute
+                            let selected = idx == minute
                             Text("\(item)")
                                 .title3(.medium)
                                 .foreground(
@@ -97,17 +130,18 @@ public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
 
 private struct TimePickerPreview: View {
     @StateObject private var provider = TimePickerProvider()
-    @State var hour = 0
-    @State var minute = 0
+    @State var date = Date.now
     var body: some View {
         DodamTimePickerPresenter(provider: provider) {
             VStack {
                 Button("Show") {
                     provider.present(.init(title: "외출 일시") {
-                        print("Hello")
+                        date = provider.date
                     })
                 }
-                Text("\(hour)")
+                Text("\(Calendar.current.dateComponents([.hour], from: date).hour!)")
+                    .foreground(DodamColor.Label.normal)
+                Text("\(Calendar.current.dateComponents([.minute], from: date).minute!)")
                     .foreground(DodamColor.Label.normal)
             }
         }
