@@ -195,16 +195,6 @@ public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
             }
         }
         .animation(.none, value: provider.monthDate)
-        .onChange(of: weeks) { _ in
-            print("=================")
-            weeks.forEach { dates in
-                dates.forEach { day in
-                    print(day)
-                }
-                print("----")
-            }
-            print("=================")
-        }
     }
 }
 

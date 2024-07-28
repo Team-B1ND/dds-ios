@@ -19,12 +19,14 @@ public final class TimePickerProvider: ModalProvider {
     public init() {}
     
     public func present(
-        _ timePicker: TimePicker
+        _ timePicker: TimePicker,
+        hour: Int = 0,
+        minute: Int = 0
     ) {
         self.isPresent = true
         
-        self.hour = 0
-        self.minute = 0
+        self.hour = hour
+        self.minute = minute
         
         self.timePicker = timePicker
     }

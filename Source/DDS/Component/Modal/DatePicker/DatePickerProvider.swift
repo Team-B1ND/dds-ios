@@ -18,12 +18,14 @@ public final class DatePickerProvider: ModalProvider {
     public init() {}
     
     public func present(
-        _ datePicker: DatePicker
+        _ datePicker: DatePicker,
+        date: Date = .now,
+        monthDate: Date = .now
     ) {
         self.isPresent = true
         
-        self.date = .now
-        self.monthDate = .now
+        self.date = date
+        self.monthDate = monthDate
         
         self.datePicker = datePicker
     }
