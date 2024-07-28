@@ -26,11 +26,15 @@ public struct Dialog {
         self.primaryButton = primaryButton
     }
     
-    public func secondaryButton(_ title: String, action: @escaping () -> Void) -> Self {
+    public func message(_ message: String? = nil) -> Self {
+        .init(title: self.title, message: message, primaryButton: self.primaryButton, secondaryButton: self.secondaryButton)
+    }
+    
+    public func secondaryButton(_ title: String, action: @escaping () -> Void = {}) -> Self {
         .init(title: self.title, message: self.message, primaryButton: self.primaryButton, secondaryButton: .init(title, action: action))
     }
     
-    public func primaryButton(_ title: String, action: @escaping () -> Void) -> Self {
+    public func primaryButton(_ title: String, action: @escaping () -> Void = {}) -> Self {
         .init(title: self.title, message: self.message, primaryButton: .init(title, action: action), secondaryButton: self.secondaryButton)
     }
 }
