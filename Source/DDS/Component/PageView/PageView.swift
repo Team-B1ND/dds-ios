@@ -30,7 +30,7 @@ public struct DodamPageView: View {
             HStack(spacing: 5) {
                 ForEach(contents.indices, id: \.self) { idx in
                     Circle()
-                        .dodamFill(selected == idx ? DodamColor.Background.normal : DodamColor.Background.alternative)
+                        .dodamFill(selected == idx ? DodamColor.Primary.normal : DodamColor.Label.disable)
                         .frame(width: 5, height: 5)
                 }
             }
@@ -49,30 +49,37 @@ public struct DodamPageView: View {
     }
 }
 
-#Preview {
-    struct DodamPagePreview: View {
-        
-        @State private var selection: Int = 0
-        
-        var body: some View {
-            DodamPageView(selection: $selection) {
-                Button("Next") {
-                    selection += 1
-                }
-                .page()
-                Button("Next") {
-                    selection += 1
-                }
-                .page()
-                Button("First") {
-                    selection = 0
-                }
-                .page()
+
+private struct DodamPagePreview: View {
+    
+    @State private var selection: Int = 0
+    
+    var body: some View {
+        DodamPageView(selection: $selection) {
+            Button("Next") {
+                selection += 1
             }
-            .frame(height: 50)
-            .padding()
-            .registerPretendard()
+            .page()
+            Button("Next") {
+                selection += 1
+            }
+            .page()
+            Button("First") {
+                selection = 0
+            }
+            .page()
         }
+        .frame(height: 50)
+        .padding()
+        .registerPretendard()
     }
-    return DodamPagePreview()
+}
+
+#Preview {
+    DodamPagePreview()
+}
+
+#Preview {
+    DodamPagePreview()
+        .preferredColorScheme(.dark)
 }
