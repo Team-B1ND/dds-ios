@@ -27,6 +27,11 @@ public struct DodamAvatar: View {
     private let url: String?
     private let size: Size
     
+    init(url: String?, size: Size) {
+        self.url = url
+        self.size = size
+    }
+    
     public static func extraSmall(url: String?) -> DodamAvatar {
         .init(url: url, size: .extraSmall)
     }
