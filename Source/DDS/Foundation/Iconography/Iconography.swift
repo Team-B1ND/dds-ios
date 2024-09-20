@@ -2,7 +2,6 @@ import Foundation
 
 @available(macOS 12, iOS 15, *)
 public enum DodamIconography: String {
-    
     case arrowLeft             = "ArrowLeft"
     case b1ndLogo              = "B1NDLogo"
     case barChart              = "BarChart"
@@ -31,6 +30,8 @@ public enum DodamIconography: String {
     case menu                  = "Menu"
     case moonPlus              = "MoonPlus"
     case note                  = "Note"
+    case pen                   = "Pen"
+    case person                = "Person"
     case plus                  = "Plus"
     case tent                  = "Tent"
     case wakeupMegaphone       = "WakeupMegaphone"
