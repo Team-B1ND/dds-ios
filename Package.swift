@@ -13,11 +13,14 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/lorenzofiamingo/swiftui-cached-async-image", from: "2.1.1")
     ],
     targets: [
         .target(
             name: "DDS",
-            dependencies: [],
+            dependencies: [
+                .product(name: "CachedAsyncImage", package: "swiftui-cached-async-image")
+            ],
             resources: [
                 .process("Foundation/Typography/Font"),
                 .process("Foundation/Iconography/Iconography.xcassets")
