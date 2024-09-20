@@ -30,7 +30,7 @@ private struct DodamFontViewModifier: ViewModifier {
 @available(macOS 12, iOS 15, *)
 public extension View {
     
-    private func dodamFont(_ type: DodamTypography) -> some View {
+    internal func dodamFont(_ type: DodamTypography) -> some View {
         self.modifier(DodamFontViewModifier(font: type))
     }
     
