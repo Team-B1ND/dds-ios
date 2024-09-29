@@ -3,8 +3,13 @@ import SwiftUI
 @available(macOS 12, iOS 15, *)
 public struct DodamTextField: View {
     
-    @State private var isHide = true
+    // MARK: - State
     @FocusState private var focused
+    @State private var animatedFocusing: Bool = false
+    @State private var isHide = true
+    private var isHighlighted: Bool {
+        animatedFocusing || !text.isEmpty
+    }
     
     // MARK: - parameters
     private let title: String
@@ -18,15 +23,15 @@ public struct DodamTextField: View {
     private let colors: TextFieldColors
     
     private init(
-        title: String = "",
+        title: String,
         text: Binding<String>,
-        font: Font = .headline(.medium),
-        supportText: String? = nil,
-        isSecured: Bool = false,
-        isEnabled: Bool = true,
-        isError: Bool = false,
-        isFirstResponder: Bool = false,
-        colors: TextFieldColors = .default
+        font: Font,
+        supportText: String?,
+        isSecured: Bool,
+        isEnabled: Bool,
+        isError: Bool,
+        isFirstResponder: Bool,
+        colors: TextFieldColors
     ) {
         self.title = title
         self._text = text
@@ -103,7 +108,6 @@ public struct DodamTextField: View {
     public var body: some View {
         HStack(spacing: 0) {
             BaseTextField(
-                title,
                 text: $text,
                 font: font,
                 supportText: supportText,
@@ -143,16 +147,37 @@ public struct DodamTextField: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .overlay {
+            Text(title)
+                .foreground(
+                    isError
+                    ? colors.errorColor
+                    : focused
+                    ? colors.primaryColor
+                    : colors.hintColor
+                )
+                .scaleEffect(
+                    isHighlighted ? 0.75 : 1,
+                    anchor: .topLeading
+                )
+                .padding(.top, isHighlighted ? -30 : 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .overlay {
             if let supportText {
                 Text(supportText)
                     .label(.medium)
                     .foreground(
                         isError
                         ? colors.errorColor
-                        : colors.foregroundColor
+                        : colors.supportTextColor
                     )
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .offset(y: 24)
+            }
+        }
+        .onChange(of: focused) { newValue in
+            withAnimation(.spring(duration: 0.1)) {
+                animatedFocusing = newValue
             }
         }
         .focused($focused)
@@ -169,14 +194,28 @@ public struct DodamTextField: View {
         @State private var pwText = ""
         
         var body: some View {
-            VStack(spacing: 20) {
+            VStack(spacing: 32) {
                 DodamTextField.default(
                     title: "아이디",
-                    text: $idText
+                    text: $idText,
+                    supportText: "20글자 이내"
                 )
                 DodamTextField.secured(
                     title: "비밀번호",
-                    text: $pwText
+                    text: $pwText,
+                    supportText: "20글자 이내"
+                )
+                DodamTextField.default(
+                    title: "비밀번호",
+                    text: $pwText,
+                    supportText: "20글자 이내",
+                    isEnabled: false
+                )
+                DodamTextField.default(
+                    title: "비밀번호",
+                    text: $pwText,
+                    supportText: "20글자 이내",
+                    isError: true
                 )
             }
             .padding()

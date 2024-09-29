@@ -11,6 +11,7 @@ public struct TextFieldColors {
     // defaut
     public let hintColor: DodamColorable
     public let strokeColor: DodamColorable
+    public let supportTextColor: DodamColorable
 
     // unfocused
     public let foregroundColor: DodamColorable
@@ -25,6 +26,7 @@ public struct TextFieldColors {
     public static let `default` = TextFieldColors(
         hintColor: DodamColor.Label.assistive,
         strokeColor: DodamColor.Line.normal,
+        supportTextColor: DodamColor.Label.alternative,
         foregroundColor: DodamColor.Label.strong,
         iconColor: DodamColor.Label.alternative,
         primaryColor: DodamColor.Primary.normal,

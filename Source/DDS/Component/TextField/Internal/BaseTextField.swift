@@ -10,15 +10,9 @@ import SwiftUI
 internal struct BaseTextField: View {
     
     @FocusState private var focused
-    @State private var animatedFocusing: Bool = false
-    
-    private var isHighlighted: Bool {
-        animatedFocusing || !text.isEmpty
-    }
     
     // MARK: - Parameters
     // text
-    private let hint: String
     @Binding private var text: String
     private let font: Font
     private let supportText: String?
@@ -35,7 +29,6 @@ internal struct BaseTextField: View {
     private let colors: TextFieldColors
     
     init(
-        _ hint: String,
         text: Binding<String>,
         font: Font,
         supportText: String?,
@@ -45,7 +38,6 @@ internal struct BaseTextField: View {
         isFirstResponder: Bool,
         colors: TextFieldColors
     ) {
-        self.hint = hint
         self._text = text
         self.font = font
         self.supportText = supportText
@@ -65,16 +57,6 @@ internal struct BaseTextField: View {
             }
         }
         .focused($focused)
-        .overlay {
-            Text(hint)
-                .foreground(colors.hintColor)
-                .scaleEffect(
-                    isHighlighted ? 0.75 : 1,
-                    anchor: .topLeading
-                )
-                .padding(.top, isHighlighted ? -30 : 0)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
         // style
         .font(font)
         .foreground(colors.foregroundColor)
@@ -86,11 +68,8 @@ internal struct BaseTextField: View {
         // interaction
         .disabled(!isEnabled)
         .onAppear {
-            focused = true
-        }
-        .onChange(of: focused) { newValue in
-            withAnimation(.spring(duration: 0.1)) {
-                animatedFocusing = newValue
+            if isFirstResponder {
+                focused = true
             }
         }
         // optimization
