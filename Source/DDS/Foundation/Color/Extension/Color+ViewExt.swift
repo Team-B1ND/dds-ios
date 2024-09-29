@@ -10,15 +10,15 @@ public enum ColorStyle {
 @available(macOS 12, iOS 15, *)
 public extension View {
     
-    func foreground(_ color: DodamColorable) -> some View {
-        self.foregroundStyle(color.color.rawValue)
+    func foreground(_ color: DodamColorable, opacity: Double = 1) -> some View {
+        self.foregroundStyle(color.color.rawValue.opacity(opacity))
     }
     
-    func background(_ color: DodamColorable) -> some View {
-        self.background(color.color.rawValue)
+    func background(_ color: DodamColorable, opacity: Double = 1) -> some View {
+        self.background(color.color.rawValue.opacity(opacity))
     }
     
-    func tint(_ color: DodamColorable) -> some View {
-        self.tint(color.color.rawValue)
+    func tint(_ color: DodamColorable, opacity: Double = 1) -> some View {
+        self.tint(color.color.rawValue.opacity(opacity))
     }
 }

@@ -31,6 +31,7 @@ public struct DodamColor: RawRepresentable {
         case alternative
         case assistive
     }
+    
     public enum Label {
         case normal
         case strong
@@ -39,27 +40,33 @@ public struct DodamColor: RawRepresentable {
         case assistive
         case disable
     }
+    
     public enum Line {
         case normal
         case neutral
         case alternative
     }
+    
     public enum Fill {
         case normal
         case neutral
         case alternative
         case assistive
     }
+    
     public enum Background {
         case normal
         case neutral
         case alternative
     }
+    
+    
     public enum Status {
         case negative
         case cautionary
         case positive
     }
+    
     public enum Static {
         case white
         case black
@@ -148,7 +155,6 @@ private extension DodamColorable {
 public protocol DodamColorable {
     var color: DodamColor { get }
 }
-
 
 private struct DodamColorPreview: View {
     
