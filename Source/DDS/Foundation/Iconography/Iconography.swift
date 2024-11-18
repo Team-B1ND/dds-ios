@@ -27,6 +27,7 @@ public enum DodamIconography: String {
     case gear                  = "Gear"
     case home                  = "Home"
     case logo                  = "Logo"
+    case magnifyingGlass       = "MagnifyingGlass"
     case megaphone             = "Megaphone"
     case menu                  = "Menu"
     case moonPlus              = "MoonPlus"
