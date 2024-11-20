@@ -1,8 +1,8 @@
 import SwiftUI
 
-public struct DodamPallete {
+public struct DodamPalette {
     private init() {}
-    public static let shared = DodamPallete()
+    public static let shared = DodamPalette()
     
     // MARK: - Common
     public let common0 = Color(0x000000)
@@ -91,7 +91,7 @@ public struct DodamPallete {
     }
     
     return VStack(spacing: 0) {
-        let P = DodamPallete.shared
+        let P = DodamPalette.shared
         let commons = [P.common0, P.common100]
         makePreview(commons)
         

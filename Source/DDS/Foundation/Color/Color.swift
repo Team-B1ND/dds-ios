@@ -147,8 +147,8 @@ extension DodamColor.Static: DodamColorable, CaseIterable {
 }
 
 private extension DodamColorable {
-    var P: DodamPallete {
-        DodamPallete.shared
+    var P: DodamPalette {
+        DodamPalette.shared
     }
 }
 
