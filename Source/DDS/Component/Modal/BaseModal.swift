@@ -2,14 +2,12 @@ import Foundation
 import SwiftUI
 
 struct BaseModal<MC: View, C: View>: View {
-    
     @Namespace var animation
     @State private var scaleEffect: CGFloat = 1.2
     @Binding var isPresent: Bool
     @State var opacity: Double = 0.0
     let backgroundColor: DodamColorable = DodamColor.Background.normal
     let cornerRadius: CGFloat = 16
-//    let shadow: SeugiShadowSystem = .evBlack(.ev1)
     @ViewBuilder let content: () -> C
     @ViewBuilder let modalContent: () -> MC
     
@@ -19,6 +17,9 @@ struct BaseModal<MC: View, C: View>: View {
             Color.black
                 .opacity(0.2 * opacity)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    self.isPresent = false
+                }
             // MARK: - Modal Content
             VStack {
                 Spacer()
@@ -26,14 +27,12 @@ struct BaseModal<MC: View, C: View>: View {
                     modalContent()
                         .background(backgroundColor)
                         .cornerRadius(cornerRadius)
-    //                    .shadow(shadow)
                         .scaleEffect(scaleEffect)
                         .opacity(opacity)
                 } else {
                     modalContent()
                         .background(backgroundColor)
                         .cornerRadius(cornerRadius)
-    //                    .shadow(shadow)
                         .opacity(opacity)
                 }
                 Spacer()
