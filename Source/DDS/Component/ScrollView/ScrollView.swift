@@ -39,7 +39,7 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     
     @Environment(\.tabViewIdx) var tabViewIdx: Int?
     @State private var topInset: CGFloat!
-    @State private var blueOpacity: CGFloat = 0
+    @State private var blueOpacity: CGFloat = 0.001
     
     public var body: some View {
         ScrollView(showsIndicators: false) {
@@ -58,8 +58,8 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
                             .onChange(of: yCoordinate) {
                                 let scrollOffset = -(($0 - topInset) / (borderSize ?? 0))
                                 
-                                // iOS 18부터 blueOpacity를 0으로 설정하면 클릭이 안 되는 버그가 발생하여 0.00001로 설정
-                                blueOpacity = max(min(scrollOffset, 1), 0.00001)
+                                // iOS 18부터 blueOpacity를 0으로 설정하면 클릭이 안 되는 버그가 발생하여 0.001로 설정
+                                blueOpacity = max(min(scrollOffset, 1), 0.001)
                             }
                     }
                 )
