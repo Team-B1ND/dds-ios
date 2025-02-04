@@ -35,6 +35,7 @@ public enum DodamIconography: String {
     case pen                   = "Pen"
     case person                = "Person"
     case plus                  = "Plus"
+    case smilingFace           = "SmilingFace"
     case tent                  = "Tent"
     case wakeupMegaphone       = "WakeupMegaphone"
     case wakeupNote            = "WakeupNote"
