@@ -18,7 +18,8 @@ internal struct BaseTextField: View {
     private let supportText: String?
     
     // state
-    private let isSecured: Bool
+    private let role: TextFieldRole
+    private let isHide: Bool
     private let isEnabled: Bool
     private let isError: Bool
     
@@ -32,7 +33,8 @@ internal struct BaseTextField: View {
         text: Binding<String>,
         font: Font,
         supportText: String?,
-        isSecured: Bool,
+        role: TextFieldRole,
+        isHide: Bool,
         isEnabled: Bool,
         isError: Bool,
         isFirstResponder: Bool,
@@ -41,7 +43,8 @@ internal struct BaseTextField: View {
         self._text = text
         self.font = font
         self.supportText = supportText
-        self.isSecured = isSecured
+        self.role = role
+        self.isHide = isHide
         self.isEnabled = isEnabled
         self.isError = isError
         self.isFirstResponder = isFirstResponder
@@ -50,10 +53,19 @@ internal struct BaseTextField: View {
     
     var body: some View {
         Group {
-            if isSecured {
-                SecureField("", text: $text)
-            } else {
+            switch (role, isHide) {
+            case (.default, _), (.secured, false):
                 TextField("", text: $text)
+            case (.secured, true):
+                SecureField("", text: $text)
+            case (.editor, _):
+                TextEditor(text: $text)
+                    .padding(.horizontal, -4)
+                    .padding(.vertical, 3)
+                    .mask {
+                        Rectangle()
+                            .padding(.top, 10) // 위에 10만큼 자르기
+                    }
             }
         }
         .focused($focused)

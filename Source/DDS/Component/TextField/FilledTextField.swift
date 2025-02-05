@@ -17,7 +17,7 @@ public struct DodamFilledTextField: View {
     @Binding private var text: String
     private let font: Font
     private let supportText: String?
-    private let isSecured: Bool
+    private let role: TextFieldRole
     private let isEnabled: Bool
     private let isError: Bool
     private let isFirstResponder: Bool
@@ -28,7 +28,7 @@ public struct DodamFilledTextField: View {
         text: Binding<String>,
         font: Font,
         supportText: String?,
-        isSecured: Bool,
+        role: TextFieldRole,
         isEnabled: Bool,
         isError: Bool,
         isFirstResponder: Bool,
@@ -38,7 +38,7 @@ public struct DodamFilledTextField: View {
         self._text = text
         self.font = font
         self.supportText = supportText
-        self.isSecured = isSecured
+        self.role = role
         self.isEnabled = isEnabled
         self.isError = isError
         self.isFirstResponder = isFirstResponder
@@ -60,7 +60,7 @@ public struct DodamFilledTextField: View {
             text: text,
             font: font,
             supportText: supportText,
-            isSecured: false,
+            role: .default,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: isFirstResponder,
@@ -83,7 +83,30 @@ public struct DodamFilledTextField: View {
             text: text,
             font: font,
             supportText: supportText,
-            isSecured: true,
+            role: .secured,
+            isEnabled: isEnabled,
+            isError: isError,
+            isFirstResponder: isFirstResponder,
+            colors: colors
+        )
+    }
+    
+    public static func editor(
+        title: String = "",
+        text: Binding<String>,
+        font: Font = .headline(.medium),
+        supportText: String? = nil,
+        isEnabled: Bool = true,
+        isError: Bool = false,
+        isFirstResponder: Bool = false,
+        colors: TextFieldColors = .default
+    ) -> Self {
+        .init(
+            title: title,
+            text: text,
+            font: font,
+            supportText: supportText,
+            role: .editor,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: isFirstResponder,
@@ -97,7 +120,7 @@ public struct DodamFilledTextField: View {
             text: _text,
             font: font,
             supportText: supportText,
-            isSecured: isSecured,
+            role: role,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: condition,
@@ -121,7 +144,8 @@ public struct DodamFilledTextField: View {
                     text: $text,
                     font: font,
                     supportText: supportText,
-                    isSecured: isSecured && isHide,
+                    role: role,
+                    isHide: isHide,
                     isEnabled: isEnabled,
                     isError: isError,
                     isFirstResponder: isFirstResponder,
@@ -129,21 +153,24 @@ public struct DodamFilledTextField: View {
                 )
                 TextFieldIcon(
                     isHide: isHide,
-                    isSecured: isSecured,
+                    role: role,
                     isEnabled: !text.isEmpty,
                     isError: isError,
                     colors: colors
                 ) {
-                    if isSecured {
-                        isHide.toggle()
-                    } else {
+                    switch role {
+                    case .default:
                         text = ""
+                    case .secured:
+                        isHide.toggle()
+                    default:
+                        break
                     }
                 }
             }
             .padding(.leading, 16)
             .padding(.trailing, 12)
-            .frame(height: 48)
+            .frame(minHeight: 48)
             .padding(.vertical, 4)
             .background(DodamColor.Background.normal)
             .overlay {
@@ -197,6 +224,11 @@ private struct TextFieldPreview: View {
                 supportText: "Support Text"
             )
             DodamFilledTextField.secured(
+                title: "Label",
+                text: $text,
+                supportText: "Support Text"
+            )
+            DodamFilledTextField.editor(
                 title: "Label",
                 text: $text,
                 supportText: "Support Text"

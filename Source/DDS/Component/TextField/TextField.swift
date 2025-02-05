@@ -16,7 +16,7 @@ public struct DodamTextField: View {
     @Binding private var text: String
     private let font: Font
     private let supportText: String?
-    private let isSecured: Bool
+    private let role: TextFieldRole
     private let isEnabled: Bool
     private let isError: Bool
     private let isFirstResponder: Bool
@@ -27,7 +27,7 @@ public struct DodamTextField: View {
         text: Binding<String>,
         font: Font,
         supportText: String?,
-        isSecured: Bool,
+        role: TextFieldRole,
         isEnabled: Bool,
         isError: Bool,
         isFirstResponder: Bool,
@@ -37,7 +37,7 @@ public struct DodamTextField: View {
         self._text = text
         self.font = font
         self.supportText = supportText
-        self.isSecured = isSecured
+        self.role = role
         self.isEnabled = isEnabled
         self.isError = isError
         self.isFirstResponder = isFirstResponder
@@ -59,7 +59,7 @@ public struct DodamTextField: View {
             text: text,
             font: font,
             supportText: supportText,
-            isSecured: false,
+            role: .default,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: isFirstResponder,
@@ -82,7 +82,30 @@ public struct DodamTextField: View {
             text: text,
             font: font,
             supportText: supportText,
-            isSecured: true,
+            role: .secured,
+            isEnabled: isEnabled,
+            isError: isError,
+            isFirstResponder: isFirstResponder,
+            colors: colors
+        )
+    }
+    
+    public static func editor(
+        title: String = "",
+        text: Binding<String>,
+        font: Font = .headline(.medium),
+        supportText: String? = nil,
+        isEnabled: Bool = true,
+        isError: Bool = false,
+        isFirstResponder: Bool = false,
+        colors: TextFieldColors = .default
+    ) -> Self {
+        .init(
+            title: title,
+            text: text,
+            font: font,
+            supportText: supportText,
+            role: .editor,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: isFirstResponder,
@@ -96,7 +119,7 @@ public struct DodamTextField: View {
             text: _text,
             font: font,
             supportText: supportText,
-            isSecured: isSecured,
+            role: role,
             isEnabled: isEnabled,
             isError: isError,
             isFirstResponder: condition,
@@ -111,7 +134,8 @@ public struct DodamTextField: View {
                 text: $text,
                 font: font,
                 supportText: supportText,
-                isSecured: isSecured && isHide,
+                role: role,
+                isHide: isHide,
                 isEnabled: isEnabled,
                 isError: isError,
                 isFirstResponder: isFirstResponder,
@@ -119,19 +143,22 @@ public struct DodamTextField: View {
             )
             TextFieldIcon(
                 isHide: isHide,
-                isSecured: isSecured,
+                role: role,
                 isEnabled: !text.isEmpty && focused,
                 isError: isError,
                 colors: colors
             ) {
-                if isSecured {
-                    isHide.toggle()
-                } else {
+                switch role {
+                case .default:
                     text = ""
+                case .secured:
+                    isHide.toggle()
+                default:
+                    break
                 }
             }
         }
-        .frame(height: 43)
+        .frame(minHeight: 43)
         .padding(.vertical, 4)
         // Layout
         .overlay {
@@ -159,8 +186,8 @@ public struct DodamTextField: View {
                     isHighlighted ? 0.75 : 1,
                     anchor: .topLeading
                 )
-                .padding(.top, isHighlighted ? -30 : 0)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, isHighlighted ? 0 : 15)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
         .overlay {
             if let supportText {
@@ -205,6 +232,12 @@ public struct DodamTextField: View {
                     text: $pwText,
                     supportText: "20글자 이내"
                 )
+                DodamTextField.editor(
+                    title: "아이디",
+                    text: $idText,
+                    supportText: "20글자 이내"
+                )
+                .frame(height: 100)
                 DodamTextField.default(
                     title: "비밀번호",
                     text: $pwText,
