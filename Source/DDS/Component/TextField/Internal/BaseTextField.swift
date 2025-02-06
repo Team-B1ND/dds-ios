@@ -59,13 +59,23 @@ internal struct BaseTextField: View {
             case (.secured, true):
                 SecureField("", text: $text)
             case (.editor, _):
-                TextEditor(text: $text)
-                    .padding(.horizontal, -4)
-                    .padding(.vertical, 3)
-                    .mask {
-                        Rectangle()
-                            .padding(.top, 10) // 위에 10만큼 자르기
+                Group {
+                    if #available(iOS 16.0, *) {
+                        TextEditor(text: $text)
+                            .scrollContentBackground(.hidden)
+                    } else {
+                        TextEditor(text: $text)
+                            .onAppear {
+                                UITextView.appearance().backgroundColor = .clear
+                            }
                     }
+                }
+                .padding(.horizontal, -4)
+                .padding(.vertical, 3)
+                .mask {
+                    Rectangle()
+                        .padding(.top, 10) // 위에 10만큼 자르기
+                }
             }
         }
         .focused($focused)
