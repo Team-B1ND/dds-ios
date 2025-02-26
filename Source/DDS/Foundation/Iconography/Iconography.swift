@@ -20,6 +20,7 @@ public enum DodamIconography: String {
     case colorfulCalender      = "ColorfulCalender"
     case convenienceStore      = "ConvenienceStore"
     case cookedRice            = "CookedRice"
+    case crown                 = "Crown"
     case domomLogo             = "DomomLogo"
     case doorOpen              = "DoorOpen"
     case exclamationmarkCircle = "ExclamationmarkCircle"
@@ -45,6 +46,5 @@ public enum DodamIconography: String {
     case wakeupMegaphone       = "WakeupMegaphone"
     case wakeupNote            = "WakeupNote"
     case xmarkCircle           = "XmarkCircle"
-    case crown                 = "Crown"
-    case clock                 = "YellowClock"
+    case yellowClock           = "YellowClock"
 }
