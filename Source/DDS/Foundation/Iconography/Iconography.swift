@@ -45,4 +45,6 @@ public enum DodamIconography: String {
     case wakeupMegaphone       = "WakeupMegaphone"
     case wakeupNote            = "WakeupNote"
     case xmarkCircle           = "XmarkCircle"
+    case crown                 = "Crown"
+    case clock                 = "YellowClock"
 }
