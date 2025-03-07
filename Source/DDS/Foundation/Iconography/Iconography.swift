@@ -22,6 +22,7 @@ public enum DodamIconography: String {
     case convenienceStore      = "ConvenienceStore"
     case cookedRice            = "CookedRice"
     case crown                 = "Crown"
+    case creditCard            = "CreditCard"
     case domomLogo             = "DomomLogo"
     case doorOpen              = "DoorOpen"
     case exclamationmarkCircle = "ExclamationmarkCircle"
