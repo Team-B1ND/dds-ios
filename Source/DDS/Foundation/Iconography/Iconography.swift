@@ -28,6 +28,7 @@ public enum DodamIconography: String {
     case exclamationmarkCircle = "ExclamationmarkCircle"
     case eye                   = "Eye"
     case eyeSlash              = "EyeSlash"
+    case file                  = "File"
     case forkAndKnife          = "ForkAndKnife"
     case fullMoonFace          = "FullMoonFace"
     case gear                  = "Gear"
