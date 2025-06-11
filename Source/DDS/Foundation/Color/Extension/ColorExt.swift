@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public extension Color {
     
@@ -17,3 +18,4 @@ public extension Color {
         )
     }
 }
+#endif

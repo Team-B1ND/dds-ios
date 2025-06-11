@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 public struct DodamDatePickerPresenter<C: View>: ModalViewProtocol {
     @StateObject private var provider: DatePickerProvider
     @State private var size: CGSize = .zero
@@ -232,3 +233,4 @@ private struct DatePickerPreview: View {
     DatePickerPreview()
         .preferredColorScheme(.dark)
 }
+#endif

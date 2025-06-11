@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+#if os(iOS)
 struct BaseModal<MC: View, C: View>: View {
     @Namespace var animation
     @State private var scaleEffect: CGFloat = 1.2
@@ -46,3 +47,4 @@ struct BaseModal<MC: View, C: View>: View {
         }
     }
 }
+#endif

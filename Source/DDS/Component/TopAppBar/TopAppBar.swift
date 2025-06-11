@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamTopAppBar: View {
     
@@ -195,3 +196,4 @@ public struct DodamTopAppBar: View {
     }
     .registerPretendard()
 }
+#endif

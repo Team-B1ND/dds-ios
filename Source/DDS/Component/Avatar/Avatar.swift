@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CachedAsyncImage
 
+#if os(iOS)
 public struct DodamAvatar: View {
     
     public enum Size: CGFloat, CaseIterable {
@@ -90,3 +91,4 @@ public struct DodamAvatar: View {
     }
     .registerPretendard()
 }
+#endif

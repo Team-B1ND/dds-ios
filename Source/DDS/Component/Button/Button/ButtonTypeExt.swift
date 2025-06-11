@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 extension DodamButton.ButtonType {
     var shape: DodamShape {
         switch self {
@@ -56,3 +57,4 @@ extension DodamButton.ButtonType {
         }
     }
 }
+#endif

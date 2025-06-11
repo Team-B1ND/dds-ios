@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct Dodam {
     
@@ -22,3 +23,4 @@ public struct Dodam {
         color.color.rawValue
     }
 }
+#endif

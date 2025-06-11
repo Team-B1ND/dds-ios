@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamSheet<C: View, V: View>: View {
     
@@ -133,3 +134,5 @@ public struct DodamSheet<C: View, V: View>: View {
     }
     return DodamSheetPreview()
 }
+
+#endif

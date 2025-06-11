@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamCheckbox: View {
     
@@ -73,3 +74,4 @@ public struct DodamCheckbox: View {
     }
     return CheckboxPreview()
 }
+#endif

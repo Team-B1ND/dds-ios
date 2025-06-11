@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 public struct DodamDivider: View {
     
     public enum DividerType {
@@ -45,3 +46,4 @@ private struct DodamDividerPreview: View {
     DodamDividerPreview()
         .preferredColorScheme(.dark)
 }
+#endif

@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if os(iOS)
 public struct DodamSegmentedButton: View {
     
     private let labels: [String]
@@ -94,3 +95,4 @@ private struct SegmentedButtonPreview: View {
     SegmentedButtonPreview()
         .preferredColorScheme(.dark)
 }
+#endif

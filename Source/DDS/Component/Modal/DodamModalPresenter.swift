@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 public struct DodamModalProvider<C: View>: View {
     
     private let dialogProvider: DialogProvider
@@ -39,3 +40,5 @@ public struct DodamModalProvider<C: View>: View {
         }
     }
 }
+
+#endif

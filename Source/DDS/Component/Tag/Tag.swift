@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 public struct DodamTag: View {
     
     public enum TagType {
@@ -69,3 +70,4 @@ private struct TagPreview: View {
     TagPreview()
         .preferredColorScheme(.dark)
 }
+#endif

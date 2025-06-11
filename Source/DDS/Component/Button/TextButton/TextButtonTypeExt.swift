@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 extension DodamTextButton.TextButtonType {
     
     var font: Font {
@@ -33,3 +34,4 @@ extension DodamTextButton.TextButtonType {
         }
     }
 }
+#endif

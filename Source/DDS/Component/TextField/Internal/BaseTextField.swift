@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 internal struct BaseTextField: View {
     
     @FocusState private var focused
@@ -102,3 +103,4 @@ internal struct BaseTextField: View {
         .textContentType(.init(rawValue: ""))
     }
 }
+#endif

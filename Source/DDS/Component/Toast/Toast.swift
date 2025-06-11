@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamToast<C: View, V: View>: View {
     
@@ -91,3 +92,4 @@ public struct DodamToast<C: View, V: View>: View {
     }
     return DodamToastPreview()
 }
+#endif

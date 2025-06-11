@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public extension Shape {
     
@@ -18,3 +19,4 @@ public extension View {
         self.clipShape(RoundedRectangle(cornerRadius: shape.radius))
     }
 }
+#endif

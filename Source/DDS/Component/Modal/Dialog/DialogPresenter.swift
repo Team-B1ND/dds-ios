@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if os(iOS)
 public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
     
     @StateObject private var provider: DialogProvider
@@ -128,3 +129,5 @@ public struct DodamDialogPresenter<C: View>: ModalViewProtocol {
     }
     return DialogPreview()
 }
+
+#endif

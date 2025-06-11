@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 public struct DodamPalette {
     private init() {}
     public static let shared = DodamPalette()
@@ -170,3 +171,4 @@ public struct DodamPalette {
         makePreview(yellows)
     }
 }
+#endif

@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamTopTabView: View {
     
@@ -100,3 +101,4 @@ private struct DodamTopTabPreview: View {
     DodamTopTabPreview()
         .preferredColorScheme(.dark)
 }
+#endif

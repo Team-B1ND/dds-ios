@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 public struct DodamFilledTextField: View {
     
     @State private var isHide = false
@@ -259,3 +260,5 @@ private struct TextFieldPreview: View {
     TextFieldPreview()
         .preferredColorScheme(.dark)
 }
+
+#endif

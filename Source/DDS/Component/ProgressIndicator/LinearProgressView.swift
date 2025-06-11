@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamLinearProgressView: View {
     
@@ -67,3 +68,4 @@ public struct DodamLinearProgressView: View {
     }
     return DodamLinearProgressPreview()
 }
+#endif

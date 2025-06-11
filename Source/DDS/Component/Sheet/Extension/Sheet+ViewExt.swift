@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public extension View {
     
@@ -18,3 +19,4 @@ public extension View {
         }
     }
 }
+#endif

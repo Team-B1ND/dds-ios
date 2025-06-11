@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamEmptyView: View {
     
@@ -64,3 +65,4 @@ private struct DodamContainerPreview: View {
     DodamContainerPreview()
         .preferredColorScheme(.dark)
 }
+#endif

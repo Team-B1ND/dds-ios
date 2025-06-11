@@ -1,6 +1,6 @@
 import SwiftUI
 
-
+#if os(iOS)
 public enum ColorStyle {
     case foreground
     case background
@@ -22,3 +22,4 @@ public extension View {
         self.tint(color.color.rawValue.opacity(opacity))
     }
 }
+#endif

@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamColor: RawRepresentable {
     
@@ -185,3 +186,4 @@ private struct DodamColorPreview: View {
     DodamColorPreview()
         .preferredColorScheme(.dark)
 }
+#endif

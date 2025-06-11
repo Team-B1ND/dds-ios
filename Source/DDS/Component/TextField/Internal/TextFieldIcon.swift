@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 internal struct TextFieldIcon: View {
     
     let isHide: Bool
@@ -54,3 +55,4 @@ internal struct TextFieldIcon: View {
         }
     }
 }
+#endif

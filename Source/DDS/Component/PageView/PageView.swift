@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamPageView: View {
     
@@ -83,3 +84,4 @@ private struct DodamPagePreview: View {
     DodamPagePreview()
         .preferredColorScheme(.dark)
 }
+#endif

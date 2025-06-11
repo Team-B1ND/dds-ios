@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 @available(macOS 12, iOS 15, *)
 public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     
@@ -101,3 +102,4 @@ public struct DodamScrollView<C: View>: DodamNavigationViewProtocol {
     .button(icon: .bell) { }
     .registerPretendard()
 }
+#endif

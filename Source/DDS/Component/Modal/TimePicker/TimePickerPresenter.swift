@@ -1,6 +1,7 @@
 import SwiftUI
 import UIKit
 
+#if os(iOS)
 public struct DodamTimePickerPresenter<C: View>: ModalViewProtocol {
     @StateObject private var provider: TimePickerProvider
     let content: () -> C
@@ -79,3 +80,4 @@ private struct TimePickerPreview: View {
     TimePickerPreview()
         .preferredColorScheme(.dark)
 }
+#endif

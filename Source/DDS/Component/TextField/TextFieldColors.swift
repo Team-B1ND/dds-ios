@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if os(iOS)
 public struct TextFieldColors {
     // defaut
     public let hintColor: DodamColorable
@@ -33,3 +34,5 @@ public struct TextFieldColors {
         errorColor: DodamColor.Status.negative
     )
 }
+
+#endif
