@@ -42,6 +42,7 @@ public enum DodamIconography: String {
     case noneCheckCircle       = "NoneCheckCircle"
     case note                  = "Note"
     case pen                   = "Pen"
+    case pencil                = "Pencil"
     case person                = "Person"
     case plus                  = "Plus"
     case redXmarkCircle        = "RedXmarkCircle"
